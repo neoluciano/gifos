@@ -7,6 +7,7 @@
     <script src="https://kit.fontawesome.com/91f7bacb1f.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
     <title>GIFOS</title>
 </head>
 
@@ -30,10 +31,45 @@
         </nav>
     </header>
     <main>
+        <section class="top">
+            <h1>Inspírate, busca, guarda, y crea los mejores <span id="gifos">GIFOS</span></h1>
+        </section>
+        <section class="searchSection">
+            <img src="/images/ilustra_header.svg" alt="gifos" id="imgIlustra">
+            <div class="searchBar">
+                <div id="searchInput">
+                    <input type="text" id="searchInputText" placeholder="Busca GIFOS y más">
+                </div>
+                <div id="searchImage">
+                    <input type="button" value="Buscar" id="searchButton">
+                    <label for="searchButton"><img src="/images/icon-search.svg" alt="Buscar"></label>
+                </div>
+            </div>
+        </section>
+        <section class="trendingText">
+            <h2>Trending:</h2>
+            <p id="trendingTerms">
+                Reactions, Entertainment, Sports, Stickers, Artists
+            </p>
+        </section>
+        <section class="trendingGifs">
+            <h2>Trending GIFOS</h2>
+            <p>Mira los últimos</br>
+                GIFOS de nuestra comunidad.</p>
+            <div class="gifList">
+                <img class="trendGifHome" src="https://media.giphy.com/media/cfuL5gqFDreXxkWQ4o/giphy.gif" alt="biker-cat">
 
+            </div>
+        </section>
     </main>
     <footer>
-
+        <h3>Compartir en:</h3>
+        <div class="social">
+            <a target="_blank" href="http://www.facebook.com"><i class="fa fa-facebook-official fa-lg"></i></a>
+            <a target="_blank" href="http://www.twitter.com"><i class="fa fa-twitter fa-lg"></i></a>
+            <a target="_blank" href="http://www.instagram.com"><i class="fa fa-instagram fa-lg"></i></a>
+        </div>
+        <p>© GIFOS 2020 All Rights Reserved.</p>
     </footer>
     <script src="/scripts/script.js"></script>
 </body>

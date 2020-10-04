@@ -87,3 +87,180 @@ ul li:after {
     width: 40px;
     height: 1px;
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    margin-top: 0.5%;
+    width: 100%;
+    /* border: 1px solid red; */
+}
+
+.top {
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    /* align-items: center;
+    align-content: center;
+    justify-content: space-around; */
+    margin-top: 105px;
+    width: 286px;
+    height: 99px;
+    /* border: 1px solid red; */
+}
+
+.top h1 {
+    color: #572EE5;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+.top h1 #gifos {
+    color: #5ED7C6;
+    /* border: 1px solid red; */
+}
+
+.searchSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#imgIlustra {
+    /* border: 1px solid red; */
+    margin-top: 31px;
+    width: 273px;
+    height: 130px;
+}
+
+.searchBar {
+    display: grid;
+    grid-template-columns: 0.9fr 0.1fr;
+    /* align-items: center; */
+    width: 334px;
+    height: 50px;
+    border: 1px solid #572EE5;
+    border-radius: 27px;
+}
+
+#searchButton {
+    display: none;
+}
+
+#searchInput {
+    /* border: 1px solid red; */
+}
+
+#searchImage {
+    display: flex;
+    align-items: center;
+    /* border: 1px solid red; */
+}
+
+#searchInputText {
+    margin-left: 20px;
+    text-align: left;
+    font-size: 16px;
+    width: 92%;
+    height: 100%;
+    border: 0;
+    /* border: 1px solid yellow; */
+    /* background-color: yellow; */
+}
+
+.trendingText {
+    margin-top: 31px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #572EE5;
+}
+
+.trendingText h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+}
+
+.trendingText p {
+    margin-top: 2px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    width: 225px;
+    text-align: center;
+    font-weight: normal;
+}
+
+.trendingGifs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin-top: 45px;
+    background-color: #F3F5F8;
+    padding-bottom: 50px;
+}
+
+.trendingGifs h2 {
+    margin-top: 46px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: #572EE5;
+}
+
+.trendingGifs p {
+    margin-top: 7px;
+    font-family: 'Roboto-Regular';
+    font-size: 16px;
+    color: #000000;
+    text-align: center;
+    line-height: 23px;
+}
+
+.gifList {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: row;
+}
+
+.trendGifHome {
+    width: 243px;
+    height: 187px;
+}
+
+footer h3 {
+    font-family: 'Roboto-Regular';
+    font-size: 15px;
+    color: #000000;
+    letter-spacing: 0;
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 5px solid #572EE5;
+    margin-top: 47px;
+}
+
+footer p {
+    font-family: 'Roboto-Regular';
+    font-size: 14px;
+    color: #000000;
+    letter-spacing: 0;
+    line-height: 20px;
+    margin-bottom: 23px;
+}
+
+.social {
+    margin: 15px;
+    width: 50%;
+    text-align: center;
+}
+
+.social i {
+    color: #CDD6E0;
+    padding: 5.3%;
+}
