@@ -193,6 +193,14 @@ main {
     font-weight: normal;
 }
 
+.trendingText p a {
+    text-decoration: none;
+}
+
+.trendingText p a::after {
+    content: ", ";
+}
+
 .trendingGifs {
     display: flex;
     flex-direction: column;
