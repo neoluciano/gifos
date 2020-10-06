@@ -272,3 +272,36 @@ footer p {
     color: #CDD6E0;
     padding: 5.3%;
 }
+
+#searchResults {
+    /* display: none; */
+    display: flex;
+    flex-direction: column;
+}
+
+.divisor {
+    margin-top: 35px;
+    border: 1px solid #9CAFC3;
+    width: 157px;
+}
+
+#searchedText {
+    margin-top: 43px;
+    color: #572EE5;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+#searchResultsGifs {
+    margin-top: 38px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 25px 21px;
+}
+
+.searchedGifsHome {
+    width: 156px;
+    height: 120px;
+}

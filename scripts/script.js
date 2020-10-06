@@ -8,6 +8,9 @@ let searchInputText = document.getElementById("searchInputText");
 let searchButton = document.getElementById("searchButton");
 let parrafoTrendingTerms = document.getElementById("trendingTerms");
 let trendingGifsList = document.getElementById("gifList");
+let searchResultsGifs = document.getElementById("searchResultsGifs");
+let searchedText = document.getElementById("searchedText");
+let searchTime = 0;
 
 
 async function trendingSearchTerms() {
@@ -36,15 +39,41 @@ function loadAndPutTrendingTerms() {
 
 searchButton.addEventListener("click", () => {
     // alert("Lo que se busco fue: " + searchInputText.value); Linea de prueba
-    console.log(buscarGif(searchInputText.value));
+    // console.log(buscarGif(searchInputText.value));
+
+    let resultsLimit = 12;
+    let offset = searchTime * resultsLimit; //Especifica la posicion de inicio de los resultados a traer.
+    console.log("El offset se paso en " + offset)
+    searchTime++;
+    loadAndPutSearchedGifs(searchInputText.value, resultsLimit, offset)
 
 })
 
-async function buscarGif(searchValue) {
-    let url = giphyEndpointSearch + "api_key=" + giphyApiKey + "&q=" + searchValue + "&limit=5";
+async function buscarGif(searchValue, resultsLimit, offset) {
+    let url = giphyEndpointSearch + "api_key=" + giphyApiKey + "&q=" + searchValue + "&limit=" + resultsLimit + "&offset=" + offset;
+    console.log(url);
     let response = await fetch(url);
     let json = await response.json();
     return json;
+}
+
+function loadAndPutSearchedGifs(searchValue, resultsLimit, offset) {
+    buscarGif(searchValue, resultsLimit, offset)
+        .then(array => {
+            searchedText.textContent = searchValue;
+            console.log(array.data)
+            for (item of array.data) {
+                // console.log(item.title);
+                let newGif = document.createElement('img');
+                newGif.src = item.images.original.url;
+                newGif.alt = item.title;
+                newGif.className = "searchedGifsHome";
+                searchResultsGifs.appendChild(newGif);
+            }
+        })
+        .catch(error => {
+            console.error("Se produjo el error siguiente: " + error);
+        })
 }
 
 async function trendingSearchGifs() {
