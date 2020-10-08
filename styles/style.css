@@ -167,6 +167,7 @@ main {
     width: 92%;
     height: 100%;
     border: 0;
+    outline: none;
     /* border: 1px solid yellow; */
     /* background-color: yellow; */
 }
@@ -273,10 +274,14 @@ footer p {
     padding: 5.3%;
 }
 
-#searchResults {
-    /* display: none; */
+.searchResults {
+    display: none;
+}
+
+.searchResultsDisplayed {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .divisor {
@@ -304,4 +309,12 @@ footer p {
 .searchedGifsHome {
     width: 156px;
     height: 120px;
+}
+
+#verMasButton {
+    display: none;
+}
+
+.button {
+    margin-top: 78px;
 }
