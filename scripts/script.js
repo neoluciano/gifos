@@ -2,17 +2,52 @@ const giphyApiKey = "tVjH0saoMhui1wYJRjsWdaUR6c0pKvn4";
 const giphyEndpointSearch = "https://api.giphy.com/v1/gifs/search?"
 const giphyTrendingSearchTerms = "https://api.giphy.com/v1/trending/searches?";
 const giphyTrendingSearchGifs = "https://api.giphy.com/v1/gifs/trending?";
+const giphyAutocomplete = "https://api.giphy.com/v1/gifs/search/tags?"
 
-
+let searchBar = document.getElementById("searchBar");
+let searchArea = document.getElementById("searchArea");
 let searchInputText = document.getElementById("searchInputText");
 let searchButton = document.getElementById("searchButton");
+let closeButton = document.getElementById("closeButton");
+let searchAutoComplete = document.getElementById("searchAutocomplete");
 let parrafoTrendingTerms = document.getElementById("trendingTerms");
 let trendingGifsList = document.getElementById("gifList");
 let verMasButton = document.getElementById("verMasButton");
 let searchedText = document.getElementById("searchedText");
+let closeImage = document.getElementById("closeImage");
 let searchTime = 0;
 let resultsLimit = 12;
 
+
+//Llamado a funciones que se ejecutan al cargar la HOME
+loadAndPutTrendingTerms(); //Obtiene y dibuja en el HTML los trending terms.
+loadAndPutTrendingGifs(); //Obtiene y dibuja en el HTML los trending GIFs
+
+
+//Fin del Llamado a funciones que se ejecutan al cargar la HOME
+
+async function autocompleteSearch(term) {
+    let url = giphyAutocomplete + "api_key=" + giphyApiKey + "&q=" + term;
+    let response = await fetch(url);
+    let json = await response.json();
+    let results = json.data
+    return results;
+}
+
+function autocompletResults(term) {
+    autocompleteSearch(term)
+        .then(array => {
+            for (item of array) {
+                // console.log(item.name);
+                let suggestion = document.createElement("div");
+                suggestion.innerHTML = item.name;
+                searchAutoComplete.appendChild(suggestion);
+            }
+        })
+        .catch(error => {
+            console.error("Se produjo el error siguiente: " + error);
+        })
+}
 
 async function trendingSearchTerms() {
     let url = giphyTrendingSearchTerms + "api_key=" + giphyApiKey;
@@ -38,16 +73,46 @@ function loadAndPutTrendingTerms() {
         })
 }
 
+searchInputText.addEventListener("click", () => {
+    searchBarStyle("active");
+
+})
+
+searchInputText.addEventListener("keyup", () => {
+    searchAutoComplete.innerHTML = "";
+    autocompletResults(searchInputText.value);
+})
+
+closeButton.addEventListener("click", () => {
+    searchBarStyle("inactive");
+})
+
+function searchBarStyle(status) {
+    if (status === "active") {
+        //SearchBar status = active
+        searchArea.style.flexDirection = "row-reverse";
+        closeImage.style.display = "flex";
+        closeImage.style.alignItems = "center";
+    } else if (status === "inactive") {
+        searchArea.style.flexDirection = "row";
+        closeImage.style.display = "none";
+        searchInputText.value = "";
+
+    }
+
+}
+
 searchButton.addEventListener("click", () => {
     // alert("Lo que se busco fue: " + searchInputText.value); Linea de prueba
     // console.log(buscarGif(searchInputText.value));
+    // autocompletResults(searchInputText.value)
     if (searchInputText.value != "") {
         searchTime = 0;
-
         let offset = searchTime * resultsLimit; //Especifica la posicion de inicio de los resultados a traer.
         console.log("El offset se paso en " + offset)
         searchTime++;
-        loadAndPutSearchedGifs(searchInputText.value, resultsLimit, offset)
+        loadAndPutSearchedGifs(searchInputText.value, resultsLimit, offset);
+
     }
 })
 
@@ -61,7 +126,7 @@ verMasButton.addEventListener("click", () => {
 
 async function buscarGif(searchValue, resultsLimit, offset) {
     let url = giphyEndpointSearch + "api_key=" + giphyApiKey + "&q=" + searchValue + "&limit=" + resultsLimit + "&offset=" + offset;
-    console.log(url);
+    // console.log(url);
     let response = await fetch(url);
     let resultArray = await response.json();
     return resultArray; //retorna un array con los resultados de busqueda
@@ -87,7 +152,7 @@ function loadAndPutSearchedGifs(searchValue, resultsLimit, offset) {
                 newSearchResultsGifs.appendChild(newGif);
             }
             searchResultsGifs.replaceWith(newSearchResultsGifs);
-            searchInputText.value = "";
+            searchBarStyle("inactive");
         })
         .catch(error => {
             console.error("Se produjo el error siguiente: " + error);
@@ -132,10 +197,10 @@ async function trendingSearchGifs() {
 function loadAndPutTrendingGifs() {
     trendingSearchGifs()
         .then(array => {
-            console.log(array.data)
+            // console.log(array.data)
             for (item of array.data) {
-                console.log(item.title);
-                console.log(item.images.original.url);
+                // console.log(item.title);
+                // console.log(item.images.original.url);
                 let newGif = document.createElement('img');
                 newGif.src = item.images.original.url;
                 newGif.alt = item.title;
@@ -146,11 +211,3 @@ function loadAndPutTrendingGifs() {
             console.error("Se produjo el error siguiente: " + error);
         })
 }
-
-
-//Llamado a funciones que se ejecutan al cargar la HOME
-loadAndPutTrendingTerms(); //Obtiene y dibuja en el HTML los trending terms.
-loadAndPutTrendingGifs();
-
-
-//Fin del Llamado a funciones que se ejecutan al cargar la HOME
