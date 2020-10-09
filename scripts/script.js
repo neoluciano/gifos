@@ -22,9 +22,48 @@ let resultsLimit = 12;
 //Llamado a funciones que se ejecutan al cargar la HOME
 loadAndPutTrendingTerms(); //Obtiene y dibuja en el HTML los trending terms.
 loadAndPutTrendingGifs(); //Obtiene y dibuja en el HTML los trending GIFs
-
-
 //Fin del Llamado a funciones que se ejecutan al cargar la HOME
+
+//Captura de Eventos
+
+searchInputText.addEventListener("click", () => {
+    searchBarStyle("active");
+
+})
+
+searchInputText.addEventListener("keyup", () => {
+    searchAutoComplete.innerHTML = "";
+    autocompletResults(searchInputText.value);
+})
+
+closeButton.addEventListener("click", () => {
+    searchBarStyle("inactive");
+    searchAutoComplete.innerHTML = "";
+})
+
+searchButton.addEventListener("click", () => {
+    // alert("Lo que se busco fue: " + searchInputText.value); Linea de prueba
+    // console.log(buscarGif(searchInputText.value));
+    // autocompletResults(searchInputText.value)
+    searchAutoComplete.innerHTML = "";
+    if (searchInputText.value != "") {
+        searchTime = 0;
+        let offset = searchTime * resultsLimit; //Especifica la posicion de inicio de los resultados a traer.
+        console.log("El offset se paso en " + offset)
+        searchTime++;
+        loadAndPutSearchedGifs(searchInputText.value, resultsLimit, offset);
+
+    }
+})
+
+verMasButton.addEventListener("click", () => {
+    //alert("Aqui va la funcionalidad para ver mas resultados!");
+    let offset = searchTime * resultsLimit; //Especifica la posicion de inicio de los resultados a traer.
+    searchTime++;
+    loadAndPutMoreSearchedGifs(searchedText.textContent, resultsLimit, offset);
+})
+
+//Fin de captura de eventos
 
 async function autocompleteSearch(term) {
     let url = giphyAutocomplete + "api_key=" + giphyApiKey + "&q=" + term;
@@ -73,20 +112,6 @@ function loadAndPutTrendingTerms() {
         })
 }
 
-searchInputText.addEventListener("click", () => {
-    searchBarStyle("active");
-
-})
-
-searchInputText.addEventListener("keyup", () => {
-    searchAutoComplete.innerHTML = "";
-    autocompletResults(searchInputText.value);
-})
-
-closeButton.addEventListener("click", () => {
-    searchBarStyle("inactive");
-})
-
 function searchBarStyle(status) {
     if (status === "active") {
         //SearchBar status = active
@@ -101,28 +126,6 @@ function searchBarStyle(status) {
     }
 
 }
-
-searchButton.addEventListener("click", () => {
-    // alert("Lo que se busco fue: " + searchInputText.value); Linea de prueba
-    // console.log(buscarGif(searchInputText.value));
-    // autocompletResults(searchInputText.value)
-    if (searchInputText.value != "") {
-        searchTime = 0;
-        let offset = searchTime * resultsLimit; //Especifica la posicion de inicio de los resultados a traer.
-        console.log("El offset se paso en " + offset)
-        searchTime++;
-        loadAndPutSearchedGifs(searchInputText.value, resultsLimit, offset);
-
-    }
-})
-
-verMasButton.addEventListener("click", () => {
-    //alert("Aqui va la funcionalidad para ver mas resultados!");
-    let offset = searchTime * resultsLimit; //Especifica la posicion de inicio de los resultados a traer.
-    searchTime++;
-    loadAndPutMoreSearchedGifs(searchedText.textContent, resultsLimit, offset);
-})
-
 
 async function buscarGif(searchValue, resultsLimit, offset) {
     let url = giphyEndpointSearch + "api_key=" + giphyApiKey + "&q=" + searchValue + "&limit=" + resultsLimit + "&offset=" + offset;
