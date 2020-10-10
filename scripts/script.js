@@ -10,6 +10,7 @@ let searchInputText = document.getElementById("searchInputText");
 let searchButton = document.getElementById("searchButton");
 let closeButton = document.getElementById("closeButton");
 let searchAutoComplete = document.getElementById("searchAutocomplete");
+let autocompleteResultsList = document.getElementById("autocompleteResultsList");
 let parrafoTrendingTerms = document.getElementById("trendingTerms");
 let trendingGifsList = document.getElementById("gifList");
 let verMasButton = document.getElementById("verMasButton");
@@ -25,44 +26,43 @@ loadAndPutTrendingGifs(); //Obtiene y dibuja en el HTML los trending GIFs
 //Fin del Llamado a funciones que se ejecutan al cargar la HOME
 
 //Captura de Eventos
-
+////////////////////
 searchInputText.addEventListener("click", () => {
     searchBarStyle("active");
-
 })
 
-searchInputText.addEventListener("keyup", () => {
-    searchAutoComplete.innerHTML = "";
-    autocompletResults(searchInputText.value);
+searchInputText.addEventListener("keyup", function(e) {
+
+    if ((e.key === "Enter") && (searchInputText.value != "")) {
+        loadAndPutSearchedGifs(searchInputText.value, resultsLimit, 0);
+        searchBarStyle("inactive");
+        autoCompleteAreaStyle("inactive");
+    } else {
+        autocompletResults(searchInputText.value);
+    }
 })
 
 closeButton.addEventListener("click", () => {
     searchBarStyle("inactive");
-    searchAutoComplete.innerHTML = "";
+    autoCompleteAreaStyle("inactive");
 })
 
 searchButton.addEventListener("click", () => {
-    // alert("Lo que se busco fue: " + searchInputText.value); Linea de prueba
-    // console.log(buscarGif(searchInputText.value));
-    // autocompletResults(searchInputText.value)
-    searchAutoComplete.innerHTML = "";
-    if (searchInputText.value != "") {
-        searchTime = 0;
-        let offset = searchTime * resultsLimit; //Especifica la posicion de inicio de los resultados a traer.
-        console.log("El offset se paso en " + offset)
-        searchTime++;
-        loadAndPutSearchedGifs(searchInputText.value, resultsLimit, offset);
 
+    autoCompleteAreaStyle("inactive");
+    if (searchInputText.value != "") {
+        loadAndPutSearchedGifs(searchInputText.value, resultsLimit, 0);
     }
 })
 
 verMasButton.addEventListener("click", () => {
-    //alert("Aqui va la funcionalidad para ver mas resultados!");
-    let offset = searchTime * resultsLimit; //Especifica la posicion de inicio de los resultados a traer.
     searchTime++;
+    let offset = searchTime * resultsLimit; //Especifica la posicion de inicio de los resultados a traer.
+    console.log("El offset se paso en " + offset)
     loadAndPutMoreSearchedGifs(searchedText.textContent, resultsLimit, offset);
 })
 
+///////////////////////////
 //Fin de captura de eventos
 
 async function autocompleteSearch(term) {
@@ -76,11 +76,22 @@ async function autocompleteSearch(term) {
 function autocompletResults(term) {
     autocompleteSearch(term)
         .then(array => {
+            autoCompleteAreaStyle("active");
             for (item of array) {
-                // console.log(item.name);
+                let resultDiv = document.createElement("div");
+                resultDiv.className = "autocompleteResult";
+
+                let autoImage = document.createElement("img");
+                autoImage.className = "autoImage";
+                autoImage.src = "/images/icon-search.svg";
+                autoImage.alt = `Buscar ${item.name}`;
+
                 let suggestion = document.createElement("div");
                 suggestion.innerHTML = item.name;
-                searchAutoComplete.appendChild(suggestion);
+
+                resultDiv.appendChild(autoImage);
+                resultDiv.appendChild(suggestion);
+                autocompleteResultsList.appendChild(resultDiv);
             }
         })
         .catch(error => {
@@ -114,7 +125,6 @@ function loadAndPutTrendingTerms() {
 
 function searchBarStyle(status) {
     if (status === "active") {
-        //SearchBar status = active
         searchArea.style.flexDirection = "row-reverse";
         closeImage.style.display = "flex";
         closeImage.style.alignItems = "center";
@@ -127,9 +137,20 @@ function searchBarStyle(status) {
 
 }
 
+function autoCompleteAreaStyle(status) {
+    if (status === "active") {
+        autocompleteResultsList.innerHTML = "";
+        searchAutoComplete.className = "searchAutocompleteDisplayed";
+    } else if (status === "inactive") {
+        autocompleteResultsList.innerHTML = "";
+        searchAutoComplete.className = "searchAutocomplete";
+
+    }
+
+}
+
 async function buscarGif(searchValue, resultsLimit, offset) {
     let url = giphyEndpointSearch + "api_key=" + giphyApiKey + "&q=" + searchValue + "&limit=" + resultsLimit + "&offset=" + offset;
-    // console.log(url);
     let response = await fetch(url);
     let resultArray = await response.json();
     return resultArray; //retorna un array con los resultados de busqueda
@@ -166,15 +187,7 @@ function loadAndPutSearchedGifs(searchValue, resultsLimit, offset) {
 function loadAndPutMoreSearchedGifs(searchValue, resultsLimit, offset) {
     buscarGif(searchValue, resultsLimit, offset)
         .then(array => {
-            // let searchResultsSection = document.getElementById("searchResults");
-            // searchResultsSection.className = "searchResultsDisplayed";
             let searchResultsGifs = document.getElementById("searchResultsGifs");
-
-            // searchedText.textContent = searchValue;
-            // console.log(array.data)
-            // let newSearchResultsGifs = document.createElement('div');
-            // newSearchResultsGifs.id = "searchResultsGifs";
-
             for (item of array.data) {
                 let newGif = document.createElement('img');
                 newGif.src = item.images.original.url;
@@ -182,8 +195,6 @@ function loadAndPutMoreSearchedGifs(searchValue, resultsLimit, offset) {
                 newGif.className = "searchedGifsHome";
                 searchResultsGifs.appendChild(newGif);
             }
-            // searchResultsGifs.replaceWith(newSearchResultsGifs);
-            // searchInputText.value = "";
         })
         .catch(error => {
             console.error("Se produjo el error siguiente: " + error);
@@ -200,10 +211,9 @@ async function trendingSearchGifs() {
 function loadAndPutTrendingGifs() {
     trendingSearchGifs()
         .then(array => {
-            // console.log(array.data)
+
             for (item of array.data) {
-                // console.log(item.title);
-                // console.log(item.images.original.url);
+
                 let newGif = document.createElement('img');
                 newGif.src = item.images.original.url;
                 newGif.alt = item.title;

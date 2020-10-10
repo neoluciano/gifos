@@ -164,12 +164,43 @@ main {
     height: 50px;
 }
 
-#searchAutocomplete {
+.searchAutocomplete {
+    display: none;
+}
+
+.searchAutocompleteDisplayed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#autocompleteResultsList {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding-left: 20px;
     padding-bottom: 5px;
+    /* border: 1px solid red; */
+    width: 90%;
+    margin-top: 5px;
+}
+
+.autocompleteResult {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #9CAFC3;
+    font-family: 'Roboto-Regular';
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.autoImage {
+    height: 15.8px;
+    width: 15.8px;
+    color: #9CAFC3;
+    margin-right: 14.6px;
 }
 
 #searchButton,
@@ -317,6 +348,13 @@ footer p {
     margin-top: 35px;
     border: 1px solid #9CAFC3;
     width: 157px;
+}
+
+.autoDivisor {
+    margin-top: 5px;
+    margin-bottom: 14px;
+    border: 1px solid #9CAFC3;
+    width: 90%;
 }
 
 #searchedText {
