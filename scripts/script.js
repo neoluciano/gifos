@@ -36,8 +36,8 @@ searchInputText.addEventListener("keyup", function(e) {
     if ((e.key === "Enter") && (searchInputText.value != "")) {
         loadAndPutSearchedGifs(searchInputText.value, resultsLimit, 0);
         searchBarStyle("inactive");
-        autoCompleteAreaStyle("inactive");
-    } else {
+        // autoCompleteAreaStyle("inactive");
+    } else if (searchInputText.value != "") {
         autocompletResults(searchInputText.value);
     }
 })
@@ -87,7 +87,8 @@ function autocompletResults(term) {
                 autoImage.alt = `Buscar ${item.name}`;
 
                 let suggestion = document.createElement("div");
-                suggestion.innerHTML = item.name;
+                suggestion.setAttribute("onclick", `loadAndPutSearchedGifs("${item.name}","${resultsLimit}",0)`);
+                suggestion.innerHTML = `${item.name}`;
 
                 resultDiv.appendChild(autoImage);
                 resultDiv.appendChild(suggestion);
@@ -112,11 +113,15 @@ function loadAndPutTrendingTerms() {
         .then(array => {
             for (let i = 0; i < 5; i++) {
                 let element = array[i];
-                let a = document.createElement('a');
-                a.textContent = element;
-                a.target = "_blank";
-                a.href = `https://giphy.com/search/${element}`;
-                parrafoTrendingTerms.appendChild(a);
+
+                let span = document.createElement("span");
+                if (i < 4) {
+                    span.textContent = `${element}, `;
+                } else {
+                    span.textContent = element;
+                }
+                span.setAttribute("onclick", `loadAndPutSearchedGifs("${element}","${resultsLimit}",0)`);
+                parrafoTrendingTerms.appendChild(span);
             }
         }).catch(error => {
             console.error("Se produjo el error siguiente: " + error);
@@ -159,6 +164,7 @@ async function buscarGif(searchValue, resultsLimit, offset) {
 function loadAndPutSearchedGifs(searchValue, resultsLimit, offset) {
     buscarGif(searchValue, resultsLimit, offset)
         .then(array => {
+            autoCompleteAreaStyle("inactive");
             let searchResultsSection = document.getElementById("searchResults");
             searchResultsSection.className = "searchResultsDisplayed";
             let searchResultsGifs = document.getElementById("searchResultsGifs");
