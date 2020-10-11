@@ -136,17 +136,6 @@ main {
     height: 130px;
 }
 
-
-/* .searchBar {
-    display: grid;
-    grid-template-columns: 0.1fr 0.8fr 0.1fr;
-    width: 334px;
-    height: 50px;
-    border: 1px solid #572EE5;
-    border-radius: 27px;
-    padding-left: 10px;
-} */
-
 .searchBar {
     display: flex;
     flex-direction: column;
@@ -194,6 +183,11 @@ main {
     font-family: 'Roboto-Regular';
     font-size: 16px;
     margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.autocompleteResult:hover {
+    font-weight: bolder;
 }
 
 .autoImage {
@@ -252,14 +246,11 @@ main {
     width: 225px;
     text-align: center;
     font-weight: normal;
+    cursor: pointer;
 }
 
-.trendingText p a {
-    text-decoration: none;
-}
-
-.trendingText p a::after {
-    content: ", ";
+.trendingText p span:hover {
+    font-weight: bolder;
 }
 
 .trendingGifs {
@@ -384,4 +375,5 @@ footer p {
 
 .button {
     margin-top: 78px;
+    cursor: pointer;
 }
