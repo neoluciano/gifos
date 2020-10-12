@@ -14,7 +14,6 @@ let closeImage = document.getElementById("closeImage");
 let searchTime = 0;
 let resultsLimit = 12;
 
-
 //Captura de Eventos
 ////////////////////
 searchInputText.addEventListener("click", () => {
@@ -57,8 +56,6 @@ verMasButton.addEventListener("click", () => {
 
 ///////////////////////////
 //Fin de captura de eventos
-
-
 
 async function autocompleteSearch(term) {
     let url = giphyAutocomplete + "api_key=" + giphyApiKey + "&q=" + term;
@@ -105,7 +102,6 @@ function searchBarStyle(status) {
         searchArea.style.flexDirection = "row";
         closeImage.style.display = "none";
         searchInputText.value = "";
-
     }
 
 }
@@ -117,7 +113,6 @@ function autoCompleteAreaStyle(status) {
     } else if (status === "inactive") {
         autocompleteResultsList.innerHTML = "";
         searchAutoComplete.className = "searchAutocomplete";
-
     }
 
 }
@@ -141,8 +136,6 @@ function loadAndPutSearchedGifs(searchValue, resultsLimit, offset) {
             newSearchResultsGifs.id = "searchResultsGifs";
 
             for (item of array.data) {
-                // console.log(item);
-
                 let resultSearchGifDiv = document.createElement("div");
                 resultSearchGifDiv.className = "resultSearchGifDiv";
 
@@ -156,7 +149,6 @@ function loadAndPutSearchedGifs(searchValue, resultsLimit, offset) {
                 resultSearchGifDiv.appendChild(newGif);
                 resultSearchGifDiv.appendChild(cardGif);
 
-                // newSearchResultsGifs.appendChild(newGif);
                 newSearchResultsGifs.appendChild(resultSearchGifDiv);
             }
             searchResultsGifs.replaceWith(newSearchResultsGifs);
@@ -193,7 +185,6 @@ function createCardForGif(userFromApi, titleFromApi) {
 
     cardGif.appendChild(actionIcons);
     cardGif.appendChild(cardGifDescription);
-
     cardGifDescription.appendChild(userName);
     cardGifDescription.appendChild(title);
 
