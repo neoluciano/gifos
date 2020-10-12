@@ -212,13 +212,24 @@ function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi
     label.setAttribute("for", button.id);
 
     let img = document.createElement("img");
-    img.src = imageSrc;
+    if (idFromApi != "") {
+        if (checkIsFavoriteGif(idFromApi)) {
+            console.log("Coincidencia!");
+            img.src = "/images/icon-fav-active.svg";
+        } else {
+            img.src = imageSrc;
+            img.setAttribute("onclick", `addFavoriteGif("${idFromApi}")`);
+        }
+    } else {
+        img.src = imageSrc;
+    }
+    // img.src = imageSrc;
     img.setAttribute("onmouseover", `src='${imageHover}'`);
     img.setAttribute("onmouseout", `src='${imageSrc}'`);
-    if (idFromApi != "") {
-        checkIsFavoriteGif(idFromApi);
-        img.setAttribute("onclick", `addFavoriteGif("${idFromApi}")`);
-    }
+    // if (idFromApi != "") {
+    //     checkIsFavoriteGif(idFromApi);
+    //     img.setAttribute("onclick", `addFavoriteGif("${idFromApi}")`);
+    // }
     img.alt = buttonValue;
 
     label.appendChild(img);
