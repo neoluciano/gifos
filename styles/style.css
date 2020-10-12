@@ -326,7 +326,44 @@ footer p {
 }
 
 .searchResults {
+    /* display: none; */
+}
+
+.resultSearchGifDiv {
+    position: relative;
+    width: 100%;
+}
+
+.cardGif {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #572EE5;
+}
+
+.actionIcons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.cardGifIcon {
+    margin: 10px;
+    cursor: pointer;
+}
+
+.cardGifButton {
     display: none;
+}
+
+.resultSearchGifDiv:hover .cardGif {
+    opacity: 0.8;
 }
 
 .searchResultsDisplayed {
@@ -364,7 +401,11 @@ footer p {
     gap: 25px 21px;
 }
 
+
+/* ESTA ES LA CLASE DE LOS GIF QUE SE DIBUJAN COMO RESULADO DE BUSQUEDA */
+
 .searchedGifsHome {
+    display: block;
     width: 156px;
     height: 120px;
 }

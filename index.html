@@ -70,8 +70,21 @@
         </section>
         <section id="searchResults" class="searchResults">
             <div class="divisor"></div>
-            <h3 id="searchedText">Mascotas</h3>
+            <h3 id="searchedText">Termino buscado</h3>
             <div id="searchResultsGifs">
+                <div class="resultSearchGifDiv">
+                    <img src="https://media1.giphy.com/media/w3BjVXdBxhjW0/giphy.gif?cid=c5e53120bs7nj6f88r4zhnt501e4e5a890sxvhclbhjzaqq1&amp;rid=giphy.gif" alt="love love kiss GIF" class="searchedGifsHome">
+                    <div class="cardGif">
+                        <div class="actionIcons">
+                            <input type="button" value="Favorito" id="favButton" class="cardGifButton">
+                            <label class="cardGifIcon" for="favButton"><img onmouseover="src='/images/icon-fav-hover.svg'" onmouseout="src='/images/icon-fav.svg'" src="/images/icon-fav.svg" alt="Favorito"></label>
+                            <input type="button" value="Descargar" id="downloadButton" class="cardGifButton">
+                            <label class="cardGifIcon" for="downloadButton"><img onmouseover="src='/images/icon-download-hover.svg'" onmouseout="src='/images/icon-download.svg'"src="/images/icon-download.svg" alt="Descargar"></label>
+                            <input type="button" value="Favorito" id="maximizeButton" class="cardGifButton">
+                            <label class="cardGifIcon" for="maximizeButton"><img onmouseover="src='/images/icon-max-hover.svg'" onmouseout="src='/images/icon-max-normal.svg'" src="/images/icon-max-normal.svg" alt="Maximizar"></label>
+                        </div>
+                    </div>
+                </div>
                 <!-- aqui se dibujan los gifs resultados de una busqueda -->
             </div>
             <input type="button" value="Ver Mas" id="verMasButton">
