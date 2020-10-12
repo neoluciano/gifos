@@ -215,7 +215,8 @@ function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi
     if (idFromApi != "") {
         if (checkIsFavoriteGif(idFromApi)) {
             console.log("Coincidencia!");
-            img.src = "/images/icon-fav-active.svg";
+            let activeFavoriteSrc = "/images/icon-fav-active.svg";
+            img.src = activeFavoriteSrc;
         } else {
             img.src = imageSrc;
             img.setAttribute("onclick", `addFavoriteGif("${idFromApi}")`);

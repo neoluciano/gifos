@@ -129,6 +129,10 @@ main {
     align-items: center;
 }
 
+.searchSection h3 {
+    display: none;
+}
+
 #imgIlustra {
     /* border: 1px solid red; */
     margin-top: 31px;
@@ -344,7 +348,8 @@ footer p {
     width: 100%;
     opacity: 0;
     transition: .5s ease;
-    background-color: #572EE5;
+    /* background-color: #572EE5; */
+    background-color: red;
 }
 
 .actionIcons {
