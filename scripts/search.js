@@ -141,11 +141,23 @@ function loadAndPutSearchedGifs(searchValue, resultsLimit, offset) {
             newSearchResultsGifs.id = "searchResultsGifs";
 
             for (item of array.data) {
+                // console.log(item);
+
+                let resultSearchGifDiv = document.createElement("div");
+                resultSearchGifDiv.className = "resultSearchGifDiv";
+
                 let newGif = document.createElement('img');
                 newGif.src = item.images.original.url;
                 newGif.alt = item.title;
                 newGif.className = "searchedGifsHome";
-                newSearchResultsGifs.appendChild(newGif);
+
+                let cardGif = createCardForGif(item.userName, item.title);
+
+                resultSearchGifDiv.appendChild(newGif);
+                resultSearchGifDiv.appendChild(cardGif);
+
+                // newSearchResultsGifs.appendChild(newGif);
+                newSearchResultsGifs.appendChild(resultSearchGifDiv);
             }
             searchResultsGifs.replaceWith(newSearchResultsGifs);
             searchBarStyle("inactive");
@@ -153,6 +165,65 @@ function loadAndPutSearchedGifs(searchValue, resultsLimit, offset) {
         .catch(error => {
             console.error("Se produjo el error siguiente: " + error);
         })
+}
+
+function createCardForGif(userFromApi, titleFromApi) {
+    let cardGif = document.createElement("div");
+    cardGif.className = "cardGif";
+
+    let actionIcons = document.createElement("div");
+    actionIcons.className = "actionIcons";
+
+    let icon = createActionIconForGifCard("Favorito", "/images/icon-fav.svg", "/images/icon-fav-hover.svg")
+    actionIcons.appendChild(icon);
+    icon = createActionIconForGifCard("Descargar", "/images/icon-download.svg", "/images/icon-download-hover.svg");
+    actionIcons.appendChild(icon);
+    icon = createActionIconForGifCard("Ampliar", "/images/icon-max-normal.svg", "/images/icon-max-hover.svg")
+    actionIcons.appendChild(icon);
+
+    let cardGifDescription = document.createElement("div");
+    cardGifDescription.className = "cardGifDescription";
+
+    let userName = document.createElement("p");
+    userName.textContent = userFromApi;
+
+    let title = document.createElement("p");
+    title.className = "tituloCardGifDescription";
+    title.textContent = titleFromApi;
+
+    cardGif.appendChild(actionIcons);
+    cardGif.appendChild(cardGifDescription);
+
+    cardGifDescription.appendChild(userName);
+    cardGifDescription.appendChild(title);
+
+    return cardGif;
+}
+
+function createActionIconForGifCard(buttonValue, imageSrc, imageHover) {
+    let icon = document.createElement("div");
+    let button = document.createElement("input");
+    button.type = "button";
+    button.value = buttonValue;
+    button.className = "cardGifButton";
+    button.id = `button${buttonValue}`;
+
+    icon.appendChild(button);
+
+    let label = document.createElement("label");
+    label.className = "cardGifIcon"
+    label.setAttribute("for", button.id);
+
+    let img = document.createElement("img");
+    img.src = imageSrc;
+    img.setAttribute("onmouseover", `src='${imageHover}'`);
+    img.setAttribute("onmouseout", `src='${imageSrc}'`);
+    img.alt = buttonValue;
+
+    label.appendChild(img);
+    icon.appendChild(label);
+
+    return icon;
 }
 
 

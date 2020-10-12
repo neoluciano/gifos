@@ -366,6 +366,15 @@ footer p {
     opacity: 0.8;
 }
 
+.cardGifDescription {
+    margin-left: 5px;
+    color: white;
+}
+
+.tituloCardGifDescription {
+    font-weight: bold;
+}
+
 .searchResultsDisplayed {
     display: flex;
     flex-direction: column;
