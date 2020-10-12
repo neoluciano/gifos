@@ -136,6 +136,7 @@ function loadAndPutSearchedGifs(searchValue, resultsLimit, offset) {
             newSearchResultsGifs.id = "searchResultsGifs";
 
             for (item of array.data) {
+                // console.log(item);
                 let resultSearchGifDiv = document.createElement("div");
                 resultSearchGifDiv.className = "resultSearchGifDiv";
 
@@ -144,7 +145,7 @@ function loadAndPutSearchedGifs(searchValue, resultsLimit, offset) {
                 newGif.alt = item.title;
                 newGif.className = "searchedGifsHome";
 
-                let cardGif = createCardForGif(item.userName, item.title);
+                let cardGif = createCardForGif(item.userName, item.title, item.id);
 
                 resultSearchGifDiv.appendChild(newGif);
                 resultSearchGifDiv.appendChild(cardGif);
@@ -159,18 +160,18 @@ function loadAndPutSearchedGifs(searchValue, resultsLimit, offset) {
         })
 }
 
-function createCardForGif(userFromApi, titleFromApi) {
+function createCardForGif(userFromApi, titleFromApi, idFromApi) {
     let cardGif = document.createElement("div");
     cardGif.className = "cardGif";
 
     let actionIcons = document.createElement("div");
     actionIcons.className = "actionIcons";
 
-    let icon = createActionIconForGifCard("Favorito", "/images/icon-fav.svg", "/images/icon-fav-hover.svg")
+    let icon = createActionIconForGifCard("Favorito", "/images/icon-fav.svg", "/images/icon-fav-hover.svg", idFromApi)
     actionIcons.appendChild(icon);
-    icon = createActionIconForGifCard("Descargar", "/images/icon-download.svg", "/images/icon-download-hover.svg");
+    icon = createActionIconForGifCard("Descargar", "/images/icon-download.svg", "/images/icon-download-hover.svg", "");
     actionIcons.appendChild(icon);
-    icon = createActionIconForGifCard("Ampliar", "/images/icon-max-normal.svg", "/images/icon-max-hover.svg")
+    icon = createActionIconForGifCard("Ampliar", "/images/icon-max-normal.svg", "/images/icon-max-hover.svg", "")
     actionIcons.appendChild(icon);
 
     let cardGifDescription = document.createElement("div");
@@ -191,13 +192,18 @@ function createCardForGif(userFromApi, titleFromApi) {
     return cardGif;
 }
 
-function createActionIconForGifCard(buttonValue, imageSrc, imageHover) {
+function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi) {
     let icon = document.createElement("div");
     let button = document.createElement("input");
     button.type = "button";
     button.value = buttonValue;
     button.className = "cardGifButton";
-    button.id = `button${buttonValue}`;
+    if (idFromApi != "") {
+        button.id = idFromApi;
+    } else {
+        button.id = `button${buttonValue}`;
+    }
+
 
     icon.appendChild(button);
 
@@ -209,6 +215,10 @@ function createActionIconForGifCard(buttonValue, imageSrc, imageHover) {
     img.src = imageSrc;
     img.setAttribute("onmouseover", `src='${imageHover}'`);
     img.setAttribute("onmouseout", `src='${imageSrc}'`);
+    if (idFromApi != "") {
+        checkIsFavoriteGif(idFromApi);
+        img.setAttribute("onclick", `addFavoriteGif("${idFromApi}")`);
+    }
     img.alt = buttonValue;
 
     label.appendChild(img);

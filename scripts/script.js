@@ -9,6 +9,7 @@ let trendingGifsList = document.getElementById("gifList");
 //Llamado a funciones que se ejecutan al cargar la HOME
 loadAndPutTrendingTerms(); //Obtiene y dibuja en el HTML los trending terms.
 loadAndPutTrendingGifs(); //Obtiene y dibuja en el HTML los trending GIFs
+// addFavoriteGif("TEST");
 //Fin del Llamado a funciones que se ejecutan al cargar la HOME
 
 //Captura de Eventos
@@ -69,4 +70,49 @@ function loadAndPutTrendingGifs() {
         }).catch(error => {
             console.error("Se produjo el error siguiente: " + error);
         })
+}
+
+function addFavoriteGif(gifId) {
+    let alreadyExists = false;
+    if (localStorage.getItem("gifosFavoriteGifs") != null) {
+        let arrayFavoritos = JSON.parse(localStorage.getItem("gifosFavoriteGifs"))
+        for (item of arrayFavoritos) { //Controlo que el GIF no exista ya en la lista de favoritos
+            if (item === gifId) {
+                alreadyExists = true;
+                console.error("El gif que intento agregar ya existe en favoritos.");
+                break;
+            }
+        }
+        if (!alreadyExists) {
+            arrayFavoritos.push(gifId);
+            localStorage.setItem("gifosFavoriteGifs", JSON.stringify(arrayFavoritos));
+        }
+
+    } else {
+        console.log("Aun no se registraron GIF favoritos en el storage local.");
+        let arrayFavoritos = [];
+        arrayFavoritos[0] = gifId;
+        localStorage.setItem("gifosFavoriteGifs", JSON.stringify(arrayFavoritos));
+    }
+
+}
+
+function removeFavoriteGif() {
+
+}
+
+function checkIsFavoriteGif(gifId) {
+    let isFavorite = false;
+    if (localStorage.getItem("gifosFavoriteGifs") != null) {
+        let arrayFavoritos = JSON.parse(localStorage.getItem("gifosFavoriteGifs"))
+        for (item of arrayFavoritos) {
+            if (item === gifId) {
+                isFavorite = true;
+                console.log(`El gif ${gifId} existe en los favoritos del local storage.`);
+                break;
+            }
+        }
+    }
+
+    return isFavorite;
 }
