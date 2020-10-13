@@ -40,7 +40,7 @@ function loadAndPutTrendingTerms() {
                 } else {
                     span.textContent = element;
                 }
-                span.setAttribute("onclick", `loadAndPutSearchedGifs("${element}","${resultsLimit}",0)`);
+                span.setAttribute("onclick", `loadAndPutSearchedGifs("${element}",0)`);
                 parrafoTrendingTerms.appendChild(span);
             }
         }).catch(error => {
