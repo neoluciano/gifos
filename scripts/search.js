@@ -51,7 +51,7 @@ verMasButton.addEventListener("click", () => {
     searchTime++;
     let offset = searchTime * resultsLimit; //Especifica la posicion de inicio de los resultados a traer.
     console.log("El offset se paso en " + offset)
-    loadAndPutMoreSearchedGifs(searchedText.textContent, resultsLimit, offset);
+    loadAndPutSearchedGifs(searchedText.textContent, resultsLimit, offset);
 })
 
 ///////////////////////////
@@ -130,8 +130,12 @@ function loadAndPutSearchedGifs(searchValue, resultsLimit, offset) {
             autoCompleteAreaStyle("inactive");
             let searchResultsSection = document.getElementById("searchResults");
             searchResultsSection.className = "searchResultsDisplayed";
+
             let searchResultsGifs = document.getElementById("searchResultsGifs");
+            //searchResultsGifs es la seccion donde se cargan los GIFs que arroja el resutlado de la busqueda
             searchedText.textContent = searchValue;
+
+
             let newSearchResultsGifs = document.createElement('div');
             newSearchResultsGifs.id = "searchResultsGifs";
 
@@ -152,8 +156,30 @@ function loadAndPutSearchedGifs(searchValue, resultsLimit, offset) {
 
                 newSearchResultsGifs.appendChild(resultSearchGifDiv);
             }
-            searchResultsGifs.replaceWith(newSearchResultsGifs);
-            searchBarStyle("inactive");
+            if (offset === 0) {
+                searchResultsGifs.replaceWith(newSearchResultsGifs);
+                searchBarStyle("inactive");
+            } else {
+                searchResultsGifs.appendChild(newSearchResultsGifs)
+            }
+
+        })
+        .catch(error => {
+            console.error("Se produjo el error siguiente: " + error);
+        })
+}
+
+function loadAndPutMoreSearchedGifs(searchValue, resultsLimit, offset) {
+    buscarGif(searchValue, resultsLimit, offset)
+        .then(array => {
+            let searchResultsGifs = document.getElementById("searchResultsGifs");
+            for (item of array.data) {
+                let newGif = document.createElement('img');
+                newGif.src = item.images.original.url;
+                newGif.alt = item.title;
+                newGif.className = "searchedGifsHome";
+                searchResultsGifs.appendChild(newGif);
+            }
         })
         .catch(error => {
             console.error("Se produjo el error siguiente: " + error);
@@ -167,11 +193,34 @@ function createCardForGif(userFromApi, titleFromApi, idFromApi) {
     let actionIcons = document.createElement("div");
     actionIcons.className = "actionIcons";
 
-    let icon = createActionIconForGifCard("Favorito", "/images/icon-fav.svg", "/images/icon-fav-hover.svg", idFromApi)
+    let icon;
+    let buttonText = "Favorito";
+    let imgSrc = "";
+    let imgSrcHover = "";
+
+    if (checkIsFavoriteGif(idFromApi)) {
+        imgSrc = "/images/icon-fav-active.svg"
+        imgSrcHover = imgSrc;
+    } else {
+        imgSrc = "/images/icon-fav.svg";
+        imgSrcHover = "/images/icon-fav-hover.svg"
+    }
+
+    icon = createActionIconForGifCard(buttonText, imgSrc, imgSrcHover, idFromApi)
     actionIcons.appendChild(icon);
-    icon = createActionIconForGifCard("Descargar", "/images/icon-download.svg", "/images/icon-download-hover.svg", "");
+
+    buttonText = "Descargar";
+    imgSrc = "/images/icon-download.svg";
+    imgSrcHover = "/images/icon-download-hover.svg";
+
+    icon = createActionIconForGifCard(buttonText, imgSrc, imgSrcHover, "");
     actionIcons.appendChild(icon);
-    icon = createActionIconForGifCard("Ampliar", "/images/icon-max-normal.svg", "/images/icon-max-hover.svg", "")
+
+    buttonText = "Ampliar";
+    imgSrc = "/images/icon-max-normal.svg";
+    imgSrcHover = "/images/icon-max-hover.svg";
+
+    icon = createActionIconForGifCard(buttonText, imgSrc, imgSrcHover, "")
     actionIcons.appendChild(icon);
 
     let cardGifDescription = document.createElement("div");
@@ -204,7 +253,6 @@ function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi
         button.id = `button${buttonValue}`;
     }
 
-
     icon.appendChild(button);
 
     let label = document.createElement("label");
@@ -212,47 +260,18 @@ function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi
     label.setAttribute("for", button.id);
 
     let img = document.createElement("img");
-    if (idFromApi != "") {
-        if (checkIsFavoriteGif(idFromApi)) {
-            console.log("Coincidencia!");
-            let activeFavoriteSrc = "/images/icon-fav-active.svg";
-            img.src = activeFavoriteSrc;
-        } else {
-            img.src = imageSrc;
-            img.setAttribute("onclick", `addFavoriteGif("${idFromApi}")`);
-        }
-    } else {
-        img.src = imageSrc;
+    if (idFromApi != "") { //Si el valor de ID del gif desde la API no es nulo, signfica que se trata del icono para agregar/remover favoritos
+        img.setAttribute("onclick", `src=addOrRemoveFavoriteGif("${idFromApi}")`);
+
     }
-    // img.src = imageSrc;
-    img.setAttribute("onmouseover", `src='${imageHover}'`);
-    img.setAttribute("onmouseout", `src='${imageSrc}'`);
-    // if (idFromApi != "") {
-    //     checkIsFavoriteGif(idFromApi);
-    //     img.setAttribute("onclick", `addFavoriteGif("${idFromApi}")`);
-    // }
+    img.src = imageSrc;
+    // img.setAttribute("onmouseover", `src='${imageHover}'`);
+    // img.setAttribute("onmouseout", `src='${imageSrc}'`);
+
     img.alt = buttonValue;
 
     label.appendChild(img);
     icon.appendChild(label);
 
     return icon;
-}
-
-
-function loadAndPutMoreSearchedGifs(searchValue, resultsLimit, offset) {
-    buscarGif(searchValue, resultsLimit, offset)
-        .then(array => {
-            let searchResultsGifs = document.getElementById("searchResultsGifs");
-            for (item of array.data) {
-                let newGif = document.createElement('img');
-                newGif.src = item.images.original.url;
-                newGif.alt = item.title;
-                newGif.className = "searchedGifsHome";
-                searchResultsGifs.appendChild(newGif);
-            }
-        })
-        .catch(error => {
-            console.error("Se produjo el error siguiente: " + error);
-        })
 }

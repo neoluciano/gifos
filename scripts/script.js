@@ -72,20 +72,26 @@ function loadAndPutTrendingGifs() {
         })
 }
 
-function addFavoriteGif(gifId) {
+function addOrRemoveFavoriteGif(gifId) {
     let alreadyExists = false;
+    let iconResult = "";
     if (localStorage.getItem("gifosFavoriteGifs") != null) {
         let arrayFavoritos = JSON.parse(localStorage.getItem("gifosFavoriteGifs"))
-        for (item of arrayFavoritos) { //Controlo que el GIF no exista ya en la lista de favoritos
+        for (item of arrayFavoritos) { //Si ya existe, lo elimino del local storage.
             if (item === gifId) {
                 alreadyExists = true;
-                console.error("El gif que intento agregar ya existe en favoritos.");
+                console.log(`El GIF ${gifId} se eliminara de los favoritos.`)
+                    // console.error("El gif que intento agregar ya existe en favoritos.");
+                arrayFavoritos.splice(arrayFavoritos.indexOf(item), 1);
+                localStorage.setItem("gifosFavoriteGifs", JSON.stringify(arrayFavoritos));
+                iconResult = "/images/icon-fav.svg";
                 break;
             }
         }
         if (!alreadyExists) {
             arrayFavoritos.push(gifId);
             localStorage.setItem("gifosFavoriteGifs", JSON.stringify(arrayFavoritos));
+            iconResult = "/images/icon-fav-active.svg";
         }
 
     } else {
@@ -93,13 +99,13 @@ function addFavoriteGif(gifId) {
         let arrayFavoritos = [];
         arrayFavoritos[0] = gifId;
         localStorage.setItem("gifosFavoriteGifs", JSON.stringify(arrayFavoritos));
+        iconResult = "/images/icon-fav-active.svg";
     }
 
-}
-
-function removeFavoriteGif() {
+    return iconResult;
 
 }
+
 
 function checkIsFavoriteGif(gifId) {
     let isFavorite = false;

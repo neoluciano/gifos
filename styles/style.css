@@ -348,8 +348,7 @@ footer p {
     width: 100%;
     opacity: 0;
     transition: .5s ease;
-    /* background-color: #572EE5; */
-    background-color: red;
+    background-color: #572EE5;
 }
 
 .actionIcons {
@@ -359,8 +358,19 @@ footer p {
 }
 
 .cardGifIcon {
+    display: flex;
+    justify-content: center;
     margin: 10px;
     cursor: pointer;
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    opacity: 70%;
+    height: 32px;
+    width: 32px;
+}
+
+.cardGifIcon:hover {
+    opacity: 100%;
 }
 
 .cardGifButton {
