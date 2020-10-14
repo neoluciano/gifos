@@ -11,6 +11,7 @@ let closeButton = document.getElementById("closeButton");
 let searchAutoComplete = document.getElementById("searchAutocomplete");
 let autocompleteResultsList = document.getElementById("autocompleteResultsList");
 let verMasButton = document.getElementById("verMasButton");
+let labelVerMasButton = document.getElementById("labelVerMasButton")
 let searchedText = document.getElementById("searchedText");
 let closeImage = document.getElementById("closeImage");
 let searchTime = 0;
@@ -31,6 +32,8 @@ searchInputText.addEventListener("keyup", function(e) {
 
     } else if (searchInputText.value != "") {
         autocompletResults(searchInputText.value);
+    } else {
+        autoCompleteAreaStyle("inactive");
     }
 })
 
@@ -130,8 +133,12 @@ function loadAndPutSearchedGifs(searchValue, offset) {
     buscarGif(searchValue, offset)
         .then(array => {
             autoCompleteAreaStyle("inactive");
+            let noResultsDiv = document.getElementById("noResultsDiv");
             let searchResultsSection = document.getElementById("searchResults");
+
             searchResultsSection.className = "searchResultsDisplayed";
+
+            console.log(array.data.length);
 
             let searchResultsGifs = document.getElementById("searchResultsGifs");
             //searchResultsGifs es la seccion donde se cargan los GIFs que arroja el resutlado de la busqueda
@@ -143,21 +150,29 @@ function loadAndPutSearchedGifs(searchValue, offset) {
             if (offset === 0) {
                 searchResultsGifs.innerHTML = "";
             }
-            for (item of array.data) {
-                // console.log(item);
-                let resultSearchGifDiv = document.createElement("div");
-                resultSearchGifDiv.className = "resultSearchGifDiv";
 
-                let newGif = document.createElement('img');
-                newGif.src = item.images.original.url;
-                newGif.alt = item.title;
-                newGif.className = "searchedGifsHome";
+            if (array.data.length === 0) { //Si la busqueda no arrojo resultados:
+                noResultsDiv.className = "noResultsDivDisplayed";
+                labelVerMasButton.style.display = "none";
+            } else {
+                labelVerMasButton.style.display = "block";
+                noResultsDiv.className = "noResultsDiv";
+                for (item of array.data) {
+                    // console.log(item);
+                    let resultSearchGifDiv = document.createElement("div");
+                    resultSearchGifDiv.className = "resultSearchGifDiv";
 
-                let cardGif = createCardForGif(item.userName, item.title, item.id);
+                    let newGif = document.createElement('img');
+                    newGif.src = item.images.original.url;
+                    newGif.alt = item.title;
+                    newGif.className = "searchedGifsHome";
 
-                resultSearchGifDiv.appendChild(newGif);
-                resultSearchGifDiv.appendChild(cardGif);
-                searchResultsGifs.appendChild(resultSearchGifDiv);
+                    let cardGif = createCardForGif(item.userName, item.title, item.id);
+
+                    resultSearchGifDiv.appendChild(newGif);
+                    resultSearchGifDiv.appendChild(cardGif);
+                    searchResultsGifs.appendChild(resultSearchGifDiv);
+                }
             }
 
         })

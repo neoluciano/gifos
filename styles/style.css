@@ -349,12 +349,33 @@ footer p {
 }
 
 .searchResults {
-    /* display: none; */
+    display: none;
 }
 
 .resultSearchGifDiv {
     position: relative;
     width: 100%;
+}
+
+.noResultsDiv {
+    display: none;
+}
+
+.noResultsDivDisplayed {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 109px;
+}
+
+#noResultsDiv p {
+    margin-top: 29px;
+    font-family: "Montserrat-Bold";
+    font-size: 22px;
+    color: #50E3C2;
+    text-align: center;
+    line-height: 25px;
+    font-weight: bold;
 }
 
 .cardGif {

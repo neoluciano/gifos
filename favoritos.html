@@ -33,52 +33,9 @@
         </nav>
     </header>
     <main>
-        <section class="top">
-            <h1>Inspírate, busca, guarda, y crea los mejores <span id="gifos">GIFOS</span></h1>
-        </section>
-        <section class="searchSection">
-            <h3>Busca GIFOS y mas</h3>
-            <img src="/images/ilustra_header.svg" alt="gifos" id="imgIlustra">
-            <div class="searchBar" id="searchBar">
-                <div id="searchArea">
-                    <div id="closeImage">
-                        <input type="button" value="Cerrar" id="closeButton">
-                        <label for="closeButton"><img src="/images/close.svg" alt="Buscar"></label>
-                    </div>
-                    <div id="searchInput">
-                        <input type="text" id="searchInputText" placeholder="Busca GIFOS y más">
-                    </div>
-                    <div id="searchImage">
-                        <input type="button" value="Buscar" id="searchButton">
-                        <label for="searchButton"><img src="/images/icon-search.svg" alt="Buscar"></label>
-                    </div>
-                </div>
-
-                <div id="searchAutocomplete" class="searchAutocomplete">
-                    <div class="autoDivisor"></div>
-                    <div id="autocompleteResultsList">
-                        <!-- aqui se escriben por JS los terminos de busqueda -->
-
-                    </div>
-                </div>
-            </div>
-
-        </section>
-        <section class="trendingText">
-            <h2>Trending:</h2>
-
-            <p id="trendingTerms">
-                <!-- aqui se dibujan los trending terms -->
-
-            </p>
-        </section>
         <section id="searchResults" class="searchResults">
-            <div class="divisor"></div>
+            <!-- <div class="divisor"></div> -->
             <h3 id="searchedText">Termino buscado</h3>
-            <div id="noResultsDiv" class="noResultsDiv">
-                <img src="/images/icon-busqueda-sin-resultado.svg">
-                <p>Intenta con otra búsqueda.</p>
-            </div>
             <div id="searchResultsGifs">
                 <div class="resultSearchGifDiv">
                     <img src="https://media1.giphy.com/media/w3BjVXdBxhjW0/giphy.gif?cid=c5e53120bs7nj6f88r4zhnt501e4e5a890sxvhclbhjzaqq1&amp;rid=giphy.gif" alt="love love kiss GIF" class="searchedGifsHome">
@@ -101,7 +58,7 @@
                 <!-- aqui se dibujan los gifs resultados de una busqueda -->
             </div>
             <input type="button" value="Ver Mas" id="verMasButton">
-            <label id="labelVerMasButton" class="button" for="verMasButton"><img src="/images/CTA-ver-mas.svg" alt="Ver Mas"></label>
+            <label class="button" for="verMasButton"><img src="/images/CTA-ver-mas.svg" alt="Ver Mas"></label>
         </section>
         <section class="trendingGifs">
             <h2>Trending GIFOS</h2>
