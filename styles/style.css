@@ -8,6 +8,10 @@ body {
     margin: auto;
 }
 
+header {
+    /* margin-bottom: 100px; */
+}
+
 #header-menu {
     display: flex;
     flex-flow: row wrap;
@@ -128,6 +132,10 @@ main {
     width: 286px;
     height: 99px;
     /* border: 1px solid red; */
+}
+
+.sectionHidden {
+    display: none;
 }
 
 .top h1 {

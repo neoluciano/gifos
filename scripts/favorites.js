@@ -1,3 +1,32 @@
+const giphyGetGifsByIdEndpoint = "https://api.giphy.com/v1/gifs?";
+
+async function getGifsByIds(string) {
+    let url = giphyGetGifsByIdEndpoint + "api_key=" + giphyApiKey + "&ids=" + string;
+    let response = await fetch(url);
+    let json = await response.json();
+    let results = json.data
+    return results;
+}
+
+function getMyFavoritesGifs() {
+    let arrayFavoritos = JSON.parse(localStorage.getItem("gifosFavoriteGifs"));
+    // console.log(arrayFavoritos);
+    // console.log(arrayFavoritos.join(','));
+    let arrayToString = arrayFavoritos.join(',');
+    getGifsByIds(arrayToString)
+        .then(array => {
+            console.log(array);
+            for (item of array) {
+
+            }
+        })
+        .catch(error => {
+            console.error("Se produjo el error siguiente: " + error);
+        })
+}
+
+getMyFavoritesGifs();
+
 function addOrRemoveFavoriteGif(gifId) {
     let alreadyExists = false;
     let iconResult = "";

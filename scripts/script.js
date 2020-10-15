@@ -4,6 +4,10 @@ const giphyTrendingSearchGifs = "https://api.giphy.com/v1/gifs/trending?";
 
 let parrafoTrendingTerms = document.getElementById("trendingTerms");
 let trendingGifsList = document.getElementById("gifList");
+let sectionTop = document.getElementById("sectionTop");
+let sectionSearch = document.getElementById("sectionSearch");
+let sectionTrendingTerms = document.getElementById("sectionTrendingTerms");
+let linkFavoritos = document.getElementById("linkFavoritos");
 
 
 //Llamado a funciones que se ejecutan al cargar la HOME
@@ -14,10 +18,20 @@ loadAndPutTrendingGifs(); //Obtiene y dibuja en el HTML los trending GIFs
 
 //Captura de Eventos
 ////////////////////
+linkFavoritos.addEventListener("click", () => {
+    drawFavoritosHTMLSection();
+    alert("Se registro el evento");
+})
 
 
 ///////////////////////////
 //Fin de captura de eventos
+
+function drawFavoritosHTMLSection() {
+    sectionTop.className = "sectionHidden";
+    sectionSearch.className = "sectionHidden";
+    sectionTrendingTerms.className = "sectionHidden";
+}
 
 
 async function trendingSearchTerms() {
