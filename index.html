@@ -12,7 +12,8 @@
 </head>
 
 <body>
-    <header>
+    <div id="header-top"></div>
+    <header id="header">
         <input type="checkbox" id="chk-menu">
         <div id="header-menu">
             <div id="logo">
@@ -30,6 +31,7 @@
                 <li><a id="linkFavoritos">Favoritos</a></li>
                 <li><a href="">Mis GIFOS</a></li>
             </ul>
+            <img id="imgCreateGifo" src="/images/button-crear-gifo.svg" alt="Crear Gifo">
         </nav>
     </header>
     <main>
@@ -76,7 +78,7 @@
             <div class="divisor"></div>
             <h3 id="searchedText">Termino buscado</h3>
             <div id="noResultsDiv" class="noResultsDiv">
-                <img src="/images/icon-busqueda-sin-resultado.svg">
+                <img src="/images/icon-busqueda-sin-resultado.svg" alt="Sin resultados">
                 <p>Intenta con otra búsqueda.</p>
             </div>
             <div id="searchResultsGifs">
@@ -85,7 +87,7 @@
                     <div class="cardGif">
                         <div class="actionIcons">
                             <input type="button" value="Favorito" id="favButton" class="cardGifButton">
-                            <div class="cardGifIcons"><label class="cardGifIcon" for favButton><img src="/images/icon-fav-active.svg"></label></div>
+                            <div class="cardGifIcons"><label class="cardGifIcon" for="favButton"><img src="/images/icon-fav-active.svg" alt="Es favorito"></label></div>
                             <!-- <label class="cardGifIcon" for="favButton"><img onmouseover="src='/images/icon-fav-hover.svg'" onmouseout="src='/images/icon-fav.svg'" src="/images/icon-fav.svg" alt="Favorito"><div class="favoriteIconIn"><img src="/images/icon-fav-active.svg"></div></label> -->
                             <input type="button" value="Descargar" id="downloadButton" class="cardGifButton">
                             <label class="cardGifIcon" for="downloadButton"><img onmouseover="src='/images/icon-download-hover.svg'" onmouseout="src='/images/icon-download.svg'" src="/images/icon-download.svg" alt="Descargar"></label>

@@ -8,7 +8,9 @@ let sectionTop = document.getElementById("sectionTop");
 let sectionSearch = document.getElementById("sectionSearch");
 let sectionTrendingTerms = document.getElementById("sectionTrendingTerms");
 let linkFavoritos = document.getElementById("linkFavoritos");
-
+let imgCreateGifo = document.getElementById("imgCreateGifo");
+let header = document.getElementById("header");
+let headerPosition = "noFixed";
 
 //Llamado a funciones que se ejecutan al cargar la HOME
 loadAndPutTrendingTerms(); //Obtiene y dibuja en el HTML los trending terms.
@@ -16,12 +18,69 @@ loadAndPutTrendingGifs(); //Obtiene y dibuja en el HTML los trending GIFs
 // addFavoriteGif("TEST");
 //Fin del Llamado a funciones que se ejecutan al cargar la HOME
 
-//Captura de Eventos
-////////////////////
+// document.addEventListener("scroll", () => {
+//     if (header.offsetTop >= 200) {
+//         headerPosition = "fixed";
+//                 alert("Aqui deberia cambiar el estilo");
+//     }
+//     else{
+//         headerPosition = "noFixed";
+//     }
+
+
+// })
+
+
+var observer = new IntersectionObserver(function(entries) {
+    // no intersection with screen
+    if (entries[0].intersectionRatio === 0)
+    // document.querySelector("#nav-container").classList.add("nav-container-sticky");
+        alert("es sticky");
+    // fully intersects with screen
+    else if (entries[0].intersectionRatio === 1)
+    // document.querySelector("#nav-container").classList.remove("nav-container-sticky");
+        alert("Ahora no debe sticky");
+}, { threshold: [0, 1] });
+
+observer.observe(document.querySelector("#header-top"));
+
+
+
+
+
+
+imgCreateGifo.onmouseover = () => {
+    imgCreateGifo.src = "/images/CTA-crear-gifo-hover.svg";
+}
+
+imgCreateGifo.onmouseleave = () => {
+    imgCreateGifo.src = "/images/button-crear-gifo.svg";
+}
+
+imgCreateGifo.onmousedown = () => {
+    imgCreateGifo.src = "/images/CTA-crear-gifo-active.svg";
+}
+
+imgCreateGifo.onmouseup = () => {
+    imgCreateGifo.src = "/images/CTA-crear-gifo-hover.svg";
+}
+
 linkFavoritos.addEventListener("click", () => {
     drawFavoritosHTMLSection();
     alert("Se registro el evento");
 })
+
+header.addEventListener("click", () => {
+    altura = header.offsetTop;
+    alert("El estado del sticky del header cambio " + altura);
+})
+
+
+
+//Captura de Eventos
+////////////////////
+
+
 
 
 ///////////////////////////
