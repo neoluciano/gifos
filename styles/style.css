@@ -561,6 +561,15 @@ footer p {
         padding: unset;
         border-bottom: 2px solid #5ED7C6;
     }
+    .top {
+        /* margin-top: 105px; */
+        width: 634px;
+        height: 100px;
+    }
+    .top h1 {
+        font-size: 35px;
+        line-height: 50px;
+    }
     ul li {
         margin: 10px;
     }
@@ -572,5 +581,12 @@ footer p {
     .searchedGifsHome {
         width: 260px;
         height: 200px;
+    }
+    .searchBar {
+        width: 551px;
+    }
+    #imgIlustra {
+        width: 399px;
+        height: 190px;
     }
 }
