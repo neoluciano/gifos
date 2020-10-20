@@ -499,11 +499,16 @@ footer p {
         align-items: center;
         position: sticky;
         top: 0;
-        background-color: #FFFFFF;
+        /* background-color: #FFFFFF; */
+    }
+    .headerSticky {
+        background: rgba(255, 255, 255, 0.50);
+        box-shadow: 0 2px 4px 1px rgba(156, 175, 195, 0.55);
+        z-index: 1;
     }
     #header-top {
         height: 1px;
-        background-color: red;
+        background-color: #572EE5;
     }
     #imgCreateGifo {
         cursor: pointer;
@@ -558,5 +563,14 @@ footer p {
     }
     ul li {
         margin: 10px;
+    }
+    #searchResultsGifs {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        gap: 25px 21px;
+    }
+    .searchedGifsHome {
+        width: 260px;
+        height: 200px;
     }
 }
