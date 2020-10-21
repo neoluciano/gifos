@@ -2,15 +2,20 @@ const giphyApiKey = "tVjH0saoMhui1wYJRjsWdaUR6c0pKvn4";
 const giphyTrendingSearchTerms = "https://api.giphy.com/v1/trending/searches?";
 const giphyTrendingSearchGifs = "https://api.giphy.com/v1/gifs/trending?";
 
+let body = document.getElementById("body");
 let parrafoTrendingTerms = document.getElementById("trendingTerms");
 let trendingGifsList = document.getElementById("gifList");
 let sectionTop = document.getElementById("sectionTop");
 let sectionSearch = document.getElementById("sectionSearch");
 let sectionTrendingTerms = document.getElementById("sectionTrendingTerms");
+let sectionTrendingGifs = document.getElementById("trendingGifs");
 let linkFavoritos = document.getElementById("linkFavoritos");
+// let searchBar = document.getElementById("searchBar");
+let linkModoNocturno = document.getElementById("modoNocturno");
 let imgCreateGifo = document.getElementById("imgCreateGifo");
 let header = document.getElementById("header");
 let headerPosition = "noFixed";
+let logo = document.getElementById("logo-text");
 
 //Llamado a funciones que se ejecutan al cargar la HOME
 loadAndPutTrendingTerms(); //Obtiene y dibuja en el HTML los trending terms.
@@ -71,9 +76,18 @@ linkFavoritos.addEventListener("click", () => {
     alert("Se registro el evento");
 })
 
-header.addEventListener("click", () => {
-    altura = header.offsetTop;
-    alert("El estado del sticky del header cambio " + altura);
+// header.addEventListener("click", () => {
+//     altura = header.offsetTop;
+//     alert("El estado del sticky del header cambio " + altura);
+// })
+
+linkModoNocturno.addEventListener("click", () => {
+    body.classList.toggle("darkMode");
+    logo.classList.toggle("darkMode");
+    searchBar.classList.toggle("darkMode");
+    searchInputText.classList.toggle("darkMode");
+    sectionTrendingGifs.classList.toggle("trendingGifsDark");
+
 })
 
 

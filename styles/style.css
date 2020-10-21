@@ -101,14 +101,15 @@ ul li {
     /* border-bottom: 1px solid white; */
 }
 
-ul li:after {
+
+/* ul li:after {
     content: "";
     position: absolute;
     transform: translate(-170%, -500%);
     background-color: white;
     width: 40px;
     height: 1px;
-}
+} */
 
 main {
     display: flex;
@@ -316,6 +317,10 @@ main {
     flex-direction: row;
 }
 
+.trendingGifsDark {
+    background-color: #222326;
+}
+
 .trendGifHome {
     width: 243px;
     height: 187px;
@@ -489,6 +494,12 @@ footer p {
 .button {
     margin-top: 78px;
     cursor: pointer;
+}
+
+.darkMode {
+    background-color: #37383C;
+    color: white;
+    border-color: white;
 }
 
 @media screen and (min-width: 640px) {
