@@ -158,16 +158,16 @@ function loadAndPutSearchedGifs(searchValue, offset) {
                 labelVerMasButton.style.display = "block";
                 noResultsDiv.className = "noResultsDiv";
                 for (item of array.data) {
-                    // console.log(item);
+                    let gifUrl = item.images.original.url;
                     let resultSearchGifDiv = document.createElement("div");
                     resultSearchGifDiv.className = "resultSearchGifDiv";
 
                     let newGif = document.createElement('img');
-                    newGif.src = item.images.original.url;
+                    newGif.src = gifUrl;
                     newGif.alt = item.title;
                     newGif.className = "searchedGifsHome";
 
-                    let cardGif = createCardForGif(item.userName, item.title, item.id);
+                    let cardGif = createCardForGif(item.userName, item.title, item.id, gifUrl);
 
                     resultSearchGifDiv.appendChild(newGif);
                     resultSearchGifDiv.appendChild(cardGif);
@@ -182,7 +182,7 @@ function loadAndPutSearchedGifs(searchValue, offset) {
 }
 
 
-function createCardForGif(userFromApi, titleFromApi, idFromApi) {
+function createCardForGif(userFromApi, titleFromApi, idFromApi, gifUrl) {
     let cardGif = document.createElement("div");
     cardGif.className = "cardGif";
 
@@ -209,7 +209,7 @@ function createCardForGif(userFromApi, titleFromApi, idFromApi) {
     imgSrc = "/images/icon-download.svg";
     imgSrcHover = "/images/icon-download-hover.svg";
 
-    icon = createActionIconForGifCard(buttonText, imgSrc, imgSrcHover, "");
+    icon = createDownloadIconForGifCard(imgSrc, gifUrl);
     actionIcons.appendChild(icon);
 
     buttonText = "Ampliar";
@@ -267,6 +267,43 @@ function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi
     img.alt = buttonValue;
 
     label.appendChild(img);
+    icon.appendChild(label);
+
+    return icon;
+}
+
+
+function createDownloadIconForGifCard(imageSrc, gifUrl) {
+    let icon = document.createElement("div");
+    let button = document.createElement("input");
+    button.type = "button";
+    button.value = "Descargar";
+    button.className = "cardGifButton";
+    button.id = `buttonDownload`;
+
+    icon.appendChild(button);
+
+    let label = document.createElement("label");
+    label.className = "cardGifIcon"
+    label.setAttribute("for", button.id);
+    let link = document.createElement("a");
+
+    link.href = gifUrl;
+    link.download = "gif"
+
+    let img = document.createElement("img");
+    // if (idFromApi != "") { //Si el valor de ID del gif desde la API no es nulo, signfica que se trata del icono para agregar/remover favoritos
+    //     img.setAttribute("onclick", `src=addOrRemoveFavoriteGif("${idFromApi}")`);
+
+    // }
+    img.src = imageSrc;
+    // img.setAttribute("onmouseover", `src='${imageHover}'`);
+    // img.setAttribute("onmouseout", `src='${imageSrc}'`);
+
+    img.alt = "Descargar";
+
+    link.appendChild(img);
+    label.appendChild(link);
     icon.appendChild(label);
 
     return icon;
