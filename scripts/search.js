@@ -202,20 +202,19 @@ function createCardForGif(userFromApi, titleFromApi, idFromApi, gifUrl) {
         imgSrcHover = "/images/icon-fav-hover.svg"
     }
 
+    //Creo el icono para agregar a "Mis Favoritos" el gif.
     icon = createActionIconForGifCard(buttonText, imgSrc, imgSrcHover, idFromApi)
     actionIcons.appendChild(icon);
 
-    buttonText = "Descargar";
-    imgSrc = "/images/icon-download.svg";
-    imgSrcHover = "/images/icon-download-hover.svg";
-
-    icon = createDownloadIconForGifCard(imgSrc, gifUrl);
+    //Creo el Icono para descargar el gif.
+    icon = createDownloadIconForGifCard(gifUrl);
     actionIcons.appendChild(icon);
 
     buttonText = "Ampliar";
     imgSrc = "/images/icon-max-normal.svg";
     imgSrcHover = "/images/icon-max-hover.svg";
 
+    //Creo el icono para maximizar el Gif
     icon = createActionIconForGifCard(buttonText, imgSrc, imgSrcHover, "")
     actionIcons.appendChild(icon);
 
@@ -272,8 +271,8 @@ function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi
     return icon;
 }
 
-
-function createDownloadIconForGifCard(imageSrc, gifUrl) {
+//Funcion que genera el icono de descarga para embeber en las hoverCards
+function createDownloadIconForGifCard(gifUrl) {
     let icon = document.createElement("div");
     let button = document.createElement("input");
     button.type = "button";
@@ -286,25 +285,27 @@ function createDownloadIconForGifCard(imageSrc, gifUrl) {
     let label = document.createElement("label");
     label.className = "cardGifIcon"
     label.setAttribute("for", button.id);
-    let link = document.createElement("a");
-
-    link.href = gifUrl;
-    link.download = "gif"
 
     let img = document.createElement("img");
-    // if (idFromApi != "") { //Si el valor de ID del gif desde la API no es nulo, signfica que se trata del icono para agregar/remover favoritos
-    //     img.setAttribute("onclick", `src=addOrRemoveFavoriteGif("${idFromApi}")`);
-
-    // }
-    img.src = imageSrc;
-    // img.setAttribute("onmouseover", `src='${imageHover}'`);
-    // img.setAttribute("onmouseout", `src='${imageSrc}'`);
-
+    img.setAttribute("onclick", `createAForDownloadGif("${gifUrl}")`);
+    img.src = "/images/icon-download.svg";
     img.alt = "Descargar";
-
-    link.appendChild(img);
-    label.appendChild(link);
+    label.appendChild(img);
     icon.appendChild(label);
 
     return icon;
+}
+
+async function createAForDownloadGif(gifUrl) {
+    let a = document.createElement('a');
+    // Obtengo la imagen como un blob
+    let response = await fetch(gifUrl);
+    let file = await response.blob();
+    //https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#Attributes
+    a.download = 'gifOS';
+    a.href = window.URL.createObjectURL(file);
+    //store download https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#JavaScript_access
+    a.dataset.downloadurl = ['image/gif', a.download, a.href].join(':');
+    //Inicio el download
+    a.click();
 }
