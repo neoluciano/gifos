@@ -3,6 +3,8 @@ const giphyGetGifsByIdEndpoint = "https://api.giphy.com/v1/gifs?";
 let favoritesSection = document.getElementById("favoritesSection");
 let linkFavoritos = document.getElementById("linkFavoritos");
 let favoritesGifsDiv = document.getElementById("favoritesGifs");
+let verMasFavoritosButton = document.getElementById("verMasFavoritosButton");
+let labelVerMasFavoritosButton = document.getElementById("labelVerMasFavoritosButton");
 let favoritesLoad = 0;
 
 
@@ -13,6 +15,12 @@ linkFavoritos.addEventListener("click", () => {
     drawFavoritosHTMLSection();
     loadAndPutMyFavoritesGifs(0);
 
+})
+
+verMasFavoritosButton.addEventListener("click", () => {
+    favoritesLoad++;
+    let offset = favoritesLoad * resultsLimit;
+    loadAndPutMyFavoritesGifs(offset);
 })
 
 ///////////////////////////
@@ -30,8 +38,8 @@ function drawFavoritosHTMLSection() {
 }
 
 
-async function getGifsByIds(string) {
-    let url = giphyGetGifsByIdEndpoint + "api_key=" + giphyApiKey + "&ids=" + string;
+async function getGifsByIds(stringIds) {
+    let url = giphyGetGifsByIdEndpoint + "api_key=" + giphyApiKey + "&ids=" + stringIds;
     let response = await fetch(url);
     let json = await response.json();
     let results = json.data
@@ -44,6 +52,11 @@ function loadAndPutMyFavoritesGifs(offset) {
     }
 
     let arrayFavoritos = JSON.parse(localStorage.getItem("gifosFavoriteGifs"));
+    // En la siguiente linea determino si quedan gifs del array de mis favoritos para mostrar. En caso negativo, ocutlaria el boton ver mas.
+    let gifsToShow = arrayFavoritos.length - (offset + resultsLimit);
+    if (gifsToShow < 0) {
+        labelVerMasFavoritosButton.style.display = "none";
+    }
     arrayFavoritos = arrayFavoritos.splice(offset, resultsLimit); //traigo solo 12 gifs por peticion, comenzando por la posicion del offset.
     let arrayToString = arrayFavoritos.join(',');
     getGifsByIds(arrayToString)

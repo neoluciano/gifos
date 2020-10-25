@@ -55,6 +55,10 @@ header {
     color: #572EE5;
 }
 
+.noDisplayed {
+    display: none;
+}
+
 .menu {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
