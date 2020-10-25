@@ -9,13 +9,16 @@ let sectionTop = document.getElementById("sectionTop");
 let sectionSearch = document.getElementById("sectionSearch");
 let sectionTrendingTerms = document.getElementById("sectionTrendingTerms");
 let sectionTrendingGifs = document.getElementById("trendingGifs");
-let linkFavoritos = document.getElementById("linkFavoritos");
+
 // let searchBar = document.getElementById("searchBar");
 let linkModoNocturno = document.getElementById("modoNocturno");
 let imgCreateGifo = document.getElementById("imgCreateGifo");
 let header = document.getElementById("header");
 let headerPosition = "noFixed";
-let logo = document.getElementById("logo-text");
+let logo = document.getElementById("logo");
+let logoText = document.getElementById("logo-text");
+
+
 
 //Llamado a funciones que se ejecutan al cargar la HOME
 loadAndPutTrendingTerms(); //Obtiene y dibuja en el HTML los trending terms.
@@ -35,6 +38,9 @@ loadAndPutTrendingGifs(); //Obtiene y dibuja en el HTML los trending GIFs
 
 // })
 
+//Esta funcion la utilizo para detectar cuando el Header Bar queda en posicion fixed y
+//a partir de eso dibujar la barra de busqueda dentro de la misma, ademas de definirle los 
+//estilos que debe tener cuando esta en esa posicion.
 
 var observer = new IntersectionObserver(function(entries) {
     // no intersection with screen
@@ -51,9 +57,8 @@ var observer = new IntersectionObserver(function(entries) {
 observer.observe(document.querySelector("#header-top"));
 
 
-
-
-
+//Captura de Eventos
+////////////////////
 
 imgCreateGifo.onmouseover = () => {
     imgCreateGifo.src = "/images/CTA-crear-gifo-hover.svg";
@@ -71,10 +76,6 @@ imgCreateGifo.onmouseup = () => {
     imgCreateGifo.src = "/images/CTA-crear-gifo-hover.svg";
 }
 
-linkFavoritos.addEventListener("click", () => {
-    drawFavoritosHTMLSection();
-    alert("Se registro el evento");
-})
 
 // header.addEventListener("click", () => {
 //     altura = header.offsetTop;
@@ -83,29 +84,21 @@ linkFavoritos.addEventListener("click", () => {
 
 linkModoNocturno.addEventListener("click", () => {
     body.classList.toggle("darkMode");
-    logo.classList.toggle("darkMode");
+    logoText.classList.toggle("darkMode");
     searchBar.classList.toggle("darkMode");
     searchInputText.classList.toggle("darkMode");
     sectionTrendingGifs.classList.toggle("trendingGifsDark");
 
 })
 
-
-
-//Captura de Eventos
-////////////////////
-
-
+logo.addEventListener("click", () => {
+    location.reload();
+})
 
 
 ///////////////////////////
 //Fin de captura de eventos
 
-function drawFavoritosHTMLSection() {
-    sectionTop.className = "sectionHidden";
-    sectionSearch.className = "sectionHidden";
-    sectionTrendingTerms.className = "sectionHidden";
-}
 
 
 async function trendingSearchTerms() {

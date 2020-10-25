@@ -1,5 +1,34 @@
 const giphyGetGifsByIdEndpoint = "https://api.giphy.com/v1/gifs?";
 
+let favoritesSection = document.getElementById("favoritesSection");
+let linkFavoritos = document.getElementById("linkFavoritos");
+let favoritesGifsDiv = document.getElementById("favoritesGifs");
+
+
+//Captura de Eventos
+////////////////////
+
+linkFavoritos.addEventListener("click", () => {
+    drawFavoritosHTMLSection();
+    getMyFavoritesGifs();
+
+})
+
+///////////////////////////
+//Fin de captura de eventos
+
+
+
+function drawFavoritosHTMLSection() {
+    sectionTop.className = "sectionHidden";
+    sectionSearch.className = "sectionHidden";
+    sectionTrendingTerms.className = "sectionHidden";
+    favoritesSection.className = "favoritesSectionDisplayed";
+    linkFavoritos.style.color = "#9CAFC3";
+
+}
+
+
 async function getGifsByIds(string) {
     let url = giphyGetGifsByIdEndpoint + "api_key=" + giphyApiKey + "&ids=" + string;
     let response = await fetch(url);
@@ -9,14 +38,28 @@ async function getGifsByIds(string) {
 }
 
 function getMyFavoritesGifs() {
+    favoritesGifsDiv.innerHTML = "";
     let arrayFavoritos = JSON.parse(localStorage.getItem("gifosFavoriteGifs"));
-    // console.log(arrayFavoritos);
-    // console.log(arrayFavoritos.join(','));
     let arrayToString = arrayFavoritos.join(',');
     getGifsByIds(arrayToString)
         .then(array => {
             console.log(array);
             for (item of array) {
+
+                let gifUrl = item.images.original.url;
+                let resultSearchGifDiv = document.createElement("div");
+                resultSearchGifDiv.className = "resultSearchGifDiv";
+
+                let newGif = document.createElement('img');
+                newGif.src = gifUrl;
+                newGif.alt = item.title;
+                newGif.className = "searchedGifsHome";
+
+                let cardGif = createCardForGif(item.userName, item.title, item.id, gifUrl);
+
+                resultSearchGifDiv.appendChild(newGif);
+                resultSearchGifDiv.appendChild(cardGif);
+                favoritesGifsDiv.appendChild(resultSearchGifDiv);
 
             }
         })
@@ -25,7 +68,7 @@ function getMyFavoritesGifs() {
         })
 }
 
-getMyFavoritesGifs();
+
 
 function addOrRemoveFavoriteGif(gifId) {
     let alreadyExists = false;

@@ -257,11 +257,9 @@ function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi
     let img = document.createElement("img");
     if (idFromApi != "") { //Si el valor de ID del gif desde la API no es nulo, signfica que se trata del icono para agregar/remover favoritos
         img.setAttribute("onclick", `src=addOrRemoveFavoriteGif("${idFromApi}")`);
-
     }
     img.src = imageSrc;
-    // img.setAttribute("onmouseover", `src='${imageHover}'`);
-    // img.setAttribute("onmouseout", `src='${imageSrc}'`);
+
 
     img.alt = buttonValue;
 
@@ -290,12 +288,14 @@ function createDownloadIconForGifCard(gifUrl) {
     img.setAttribute("onclick", `createAForDownloadGif("${gifUrl}")`);
     img.src = "/images/icon-download.svg";
     img.alt = "Descargar";
+
     label.appendChild(img);
     icon.appendChild(label);
 
     return icon;
 }
 
+//Funcion que se llama cuando se hace click en el icono de descarga de un Gif.
 async function createAForDownloadGif(gifUrl) {
     let a = document.createElement('a');
     // Obtengo la imagen como un blob
