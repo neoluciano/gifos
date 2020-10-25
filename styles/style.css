@@ -234,6 +234,7 @@ main {
 #closeButton,
 #closeImage {
     display: none;
+    cursor: pointer;
 }
 
 #searchInput {
@@ -241,9 +242,14 @@ main {
     width: 70%;
 }
 
+#imgLupa {
+    cursor: pointer;
+}
+
 #searchImage {
     display: flex;
     align-items: center;
+    cursor: pointer;
     /* border: 1px solid red; */
 }
 
@@ -493,11 +499,14 @@ footer p {
     height: 120px;
 }
 
-#verMasButton {
+#verMasButton,
+#verMasFavoritosButton {
     display: none;
 }
 
 .button {
+    display: flex;
+    justify-content: center;
     margin-top: 78px;
     cursor: pointer;
 }
@@ -507,6 +516,14 @@ footer p {
     color: white;
     border-color: white;
 }
+
+
+/* .btnVerMas {
+    display: block;
+    border: none;
+    background-color: unset;
+    cursor: pointer;
+} */
 
 @media screen and (min-width: 640px) {
     header {
@@ -572,6 +589,10 @@ footer p {
         padding: unset;
         border-bottom: 2px solid #5ED7C6;
     }
+    ul a:active {
+        color: #9CAFC3;
+        border-bottom: unset;
+    }
     .top {
         /* margin-top: 105px; */
         width: 634px;
@@ -601,6 +622,11 @@ footer p {
         height: 190px;
     }
     .favoritesSectionDisplayed {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .favoritesDiv {
         display: flex;
         flex-direction: column;
         justify-content: center;

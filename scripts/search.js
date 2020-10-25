@@ -11,6 +11,7 @@ let closeButton = document.getElementById("closeButton");
 let searchAutoComplete = document.getElementById("searchAutocomplete");
 let autocompleteResultsList = document.getElementById("autocompleteResultsList");
 let verMasButton = document.getElementById("verMasButton");
+let imgVerMasButton = document.getElementById("imgVerMasButton");
 let labelVerMasButton = document.getElementById("labelVerMasButton")
 let searchedText = document.getElementById("searchedText");
 let closeImage = document.getElementById("closeImage");
@@ -43,11 +44,8 @@ closeButton.addEventListener("click", () => {
 })
 
 searchButton.addEventListener("click", () => {
-
-
     if (searchInputText.value != "") {
         searchTime = 0;
-
         loadAndPutSearchedGifs(searchInputText.value, 0);
     }
 })
@@ -58,6 +56,14 @@ verMasButton.addEventListener("click", () => {
     console.log("El offset se paso en " + offset)
     loadAndPutSearchedGifs(searchedText.textContent, offset);
 })
+
+imgVerMasButton.onmouseover = () => {
+    imgVerMasButton.src = "/images/CTA-ver-mas-hover.svg";
+}
+
+imgVerMasButton.onmouseleave = () => {
+    imgVerMasButton.src = "/images/CTA-ver-mas.svg";
+}
 
 ///////////////////////////
 //Fin de captura de eventos
@@ -93,7 +99,7 @@ function autocompletResults(term) {
             }
         })
         .catch(error => {
-            console.error("Se produjo el error siguiente: " + error);
+            console.error("autocompletResults: se produjo el error siguiente: " + error);
         })
 }
 

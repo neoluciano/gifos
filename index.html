@@ -52,7 +52,7 @@
                     </div>
                     <div id="searchImage">
                         <input type="button" value="Buscar" id="searchButton">
-                        <label for="searchButton"><img src="/images/icon-search.svg" alt="Buscar"></label>
+                        <label for="searchButton"><img id="imgLupa" src="/images/icon-search.svg" alt="Buscar"></label>
                     </div>
                 </div>
 
@@ -93,7 +93,7 @@
                     <!-- aqui se dibujan los gifs resultados de una busqueda -->
                 </div>
                 <input type="button" value="Ver Mas" id="verMasButton">
-                <label id="labelVerMasButton" class="button" for="verMasButton"><img src="/images/CTA-ver-mas.svg" alt="Ver Mas"></label>
+                <label id="labelVerMasButton" class="button" for="verMasButton"><img id="imgVerMasButton" src="/images/CTA-ver-mas.svg" alt="Ver Mas"></label>
             </div>
 
         </section>
@@ -106,12 +106,16 @@
             </p>
         </section>
         <section id="favoritesSection" class="favoritesSection">
-            <img src="/images/icon-favoritos.svg">
-            <h3>Favoritos</h3>
-            <div id="favoritesGifs" class="gifsGrid">
+            <div class="favoritesDiv">
+                <img src="/images/icon-favoritos.svg">
+                <h3>Favoritos</h3>
+                <div id="favoritesGifs" class="gifsGrid">
 
+                </div>
+
+                <input type="button" value="Ver Mas" id="verMasFavoritosButton">
+                <label id="labelVerMasFavoritosButton" class="button" for="verMasFavoritosButton"><img id="imgVerMasFavoritosButton" src="/images/CTA-ver-mas.svg" alt="Ver Mas"></label>
             </div>
-
         </section>
 
         <section class="trendingGifs" id="trendingGifs">

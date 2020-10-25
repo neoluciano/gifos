@@ -3,6 +3,7 @@ const giphyGetGifsByIdEndpoint = "https://api.giphy.com/v1/gifs?";
 let favoritesSection = document.getElementById("favoritesSection");
 let linkFavoritos = document.getElementById("linkFavoritos");
 let favoritesGifsDiv = document.getElementById("favoritesGifs");
+let favoritesLoad = 0;
 
 
 //Captura de Eventos
@@ -10,7 +11,7 @@ let favoritesGifsDiv = document.getElementById("favoritesGifs");
 
 linkFavoritos.addEventListener("click", () => {
     drawFavoritosHTMLSection();
-    getMyFavoritesGifs();
+    loadAndPutMyFavoritesGifs(0);
 
 })
 
@@ -37,9 +38,13 @@ async function getGifsByIds(string) {
     return results;
 }
 
-function getMyFavoritesGifs() {
-    favoritesGifsDiv.innerHTML = "";
+function loadAndPutMyFavoritesGifs(offset) {
+    if (offset === 0) {
+        favoritesGifsDiv.innerHTML = "";
+    }
+
     let arrayFavoritos = JSON.parse(localStorage.getItem("gifosFavoriteGifs"));
+    arrayFavoritos = arrayFavoritos.splice(offset, resultsLimit); //traigo solo 12 gifs por peticion, comenzando por la posicion del offset.
     let arrayToString = arrayFavoritos.join(',');
     getGifsByIds(arrayToString)
         .then(array => {
