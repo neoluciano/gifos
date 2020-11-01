@@ -241,6 +241,13 @@ main {
     cursor: pointer;
 }
 
+#closeImageDiv {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 20px;
+}
+
 #searchInput {
     /* border: 1px solid red; */
     width: 70%;
@@ -254,11 +261,12 @@ main {
     display: flex;
     align-items: center;
     cursor: pointer;
+    width: 20px;
     /* border: 1px solid red; */
 }
 
 #searchInputText {
-    margin-left: 20px;
+    /* margin-left: 20px; */
     text-align: left;
     font-size: 16px;
     width: 100%;
@@ -540,7 +548,7 @@ footer p {
         /* background-color: #FFFFFF; */
     }
     .headerSticky {
-        background: rgba(255, 255, 255, 0.50);
+        background: rgba(255, 255, 255, 0.95);
         box-shadow: 0 2px 4px 1px rgba(156, 175, 195, 0.55);
         z-index: 1;
     }

@@ -43,9 +43,9 @@
             <img src="/images/ilustra_header.svg" alt="gifos" id="imgIlustra">
             <div class="searchBar" id="searchBar">
                 <div id="searchArea">
-                    <div id="closeImage">
+                    <div id="closeImageDiv">
                         <input type="button" value="Cerrar" id="closeButton">
-                        <label for="closeButton"><img src="/images/close.svg" alt="Buscar"></label>
+                        <label for="closeButton"><img id="closeImage" src="/images/close.svg" alt="Buscar"></label>
                     </div>
                     <div id="searchInput">
                         <input type="text" id="searchInputText" placeholder="Busca GIFOS y más">
@@ -64,6 +64,15 @@
                     </div>
                 </div>
             </div>
+
+            <section class="trendingText" id="sectionTrendingTerms">
+                <h2>Trending:</h2>
+
+                <p id="trendingTerms">
+                    <!-- aqui se dibujan los trending terms -->
+
+                </p>
+            </section>
 
             <div id="searchResults" class="searchResults">
                 <div class="divisor"></div>
@@ -97,14 +106,7 @@
             </div>
 
         </section>
-        <section class="trendingText" id="sectionTrendingTerms">
-            <h2>Trending:</h2>
 
-            <p id="trendingTerms">
-                <!-- aqui se dibujan los trending terms -->
-
-            </p>
-        </section>
         <section id="favoritesSection" class="favoritesSection">
             <div class="favoritesDiv">
                 <img src="/images/icon-favoritos.svg">
