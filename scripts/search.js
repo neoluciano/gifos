@@ -16,6 +16,9 @@ let labelVerMasButton = document.getElementById("labelVerMasButton")
 let searchedText = document.getElementById("searchedText");
 let closeImage = document.getElementById("closeImage");
 let searchTime = 0;
+let modal = document.getElementById("gifModal");
+let modalImg = document.getElementById("gifMaximized");
+let modalClose = document.getElementById("modalClose");
 
 
 //Captura de Eventos
@@ -64,6 +67,10 @@ imgVerMasButton.onmouseover = () => {
 imgVerMasButton.onmouseleave = () => {
     imgVerMasButton.src = "/images/CTA-ver-mas.svg";
 }
+
+modalClose.addEventListener("click", () => {
+    modal.style.display = "none";
+})
 
 ///////////////////////////
 //Fin de captura de eventos
@@ -183,7 +190,7 @@ function loadAndPutSearchedGifs(searchValue, offset) {
 
         })
         .catch(error => {
-            console.error("Se produjo el error siguiente: " + error);
+            console.error("loadAndPutSearchedGifs: Se produjo el error siguiente: " + error);
         })
 }
 
@@ -216,12 +223,12 @@ function createCardForGif(userFromApi, titleFromApi, idFromApi, gifUrl) {
     icon = createDownloadIconForGifCard(gifUrl);
     actionIcons.appendChild(icon);
 
-    buttonText = "Ampliar";
-    imgSrc = "/images/icon-max-normal.svg";
-    imgSrcHover = "/images/icon-max-hover.svg";
+    // buttonText = "Ampliar";
+    // imgSrc = "/images/icon-max-normal.svg";
+    // imgSrcHover = "/images/icon-max-hover.svg";
 
     //Creo el icono para maximizar el Gif
-    icon = createActionIconForGifCard(buttonText, imgSrc, imgSrcHover, "")
+    icon = createMaximizeIconForGifCard(gifUrl);
     actionIcons.appendChild(icon);
 
     let cardGifDescription = document.createElement("div");
@@ -275,8 +282,52 @@ function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi
     return icon;
 }
 
+
+function createMaximizeIconForGifCard(gifUrl) {
+    let imageSrc = "/images/icon-max-normal.svg";
+    let icon = document.createElement("div");
+    let button = document.createElement("input");
+    button.type = "button";
+    button.value = "Ampliar";
+    button.className = "cardGifButton";
+    button.id = `button${button.value}`;
+
+
+    icon.appendChild(button);
+
+    let label = document.createElement("label");
+    label.className = "cardGifIcon"
+    label.setAttribute("for", button.id);
+
+    let img = document.createElement("img");
+    img.setAttribute("onclick", `maximizeGif("${gifUrl}")`);
+
+    // if (idFromApi != "") { //Si el valor de ID del gif desde la API no es nulo, signfica que se trata del icono para agregar/remover favoritos
+    //     img.setAttribute("onclick", `src=addOrRemoveFavoriteGif("${idFromApi}")`);
+    // }
+
+    img.src = imageSrc;
+    img.alt = button.value;
+
+    label.appendChild(img);
+    icon.appendChild(label);
+
+    return icon;
+}
+
+
+function maximizeGif(gifUrl) {
+    modalImg.src = gifUrl;
+    modal.style.display = "block";
+    modalClose.style.width = `${modalImg.clientWidth}px`;
+    console.log(modalImg.clientWidth);
+
+}
+
+
 //Funcion que genera el icono de descarga para embeber en las hoverCards
 function createDownloadIconForGifCard(gifUrl) {
+    let imgSrc = "/images/icon-download.svg";
     let icon = document.createElement("div");
     let button = document.createElement("input");
     button.type = "button";
@@ -292,7 +343,7 @@ function createDownloadIconForGifCard(gifUrl) {
 
     let img = document.createElement("img");
     img.setAttribute("onclick", `createAForDownloadGif("${gifUrl}")`);
-    img.src = "/images/icon-download.svg";
+    img.src = imgSrc;
     img.alt = "Descargar";
 
     label.appendChild(img);

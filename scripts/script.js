@@ -26,19 +26,8 @@ loadAndPutTrendingGifs(); //Obtiene y dibuja en el HTML los trending GIFs
 // addFavoriteGif("TEST");
 //Fin del Llamado a funciones que se ejecutan al cargar la HOME
 
-// document.addEventListener("scroll", () => {
-//     if (header.offsetTop >= 200) {
-//         headerPosition = "fixed";
-//                 alert("Aqui deberia cambiar el estilo");
-//     }
-//     else{
-//         headerPosition = "noFixed";
-//     }
 
-
-// })
-
-//Esta funcion la utilizo para detectar cuando el Header Bar queda en posicion fixed y
+//Esta funcion IntersectionObserver la utilizo para detectar cuando el Header Bar queda en posicion fixed y
 //a partir de eso dibujar la barra de busqueda dentro de la misma, ademas de definirle los 
 //estilos que debe tener cuando esta en esa posicion.
 

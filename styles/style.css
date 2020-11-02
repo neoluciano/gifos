@@ -537,6 +537,49 @@ footer p {
     cursor: pointer;
 } */
 
+
+/* Estilos para GifoMAX (Modal) en Mobile */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 2;
+    /* Sit on top */
+    padding-top: 50px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto !important;
+    /* Enable scroll if needed */
+    background-color: rgba(255, 255, 255, 0.90);
+    /* Fallback color */
+}
+
+#modal-content {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    border: 1px solid red;
+    /* overflow-y: auto !important; */
+}
+
+#modalClose {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    cursor: pointer;
+    margin-bottom: 78px;
+    padding-right: 10px;
+    /* width: 50%; */
+}
+
 @media screen and (min-width: 640px) {
     header {
         display: flex;
