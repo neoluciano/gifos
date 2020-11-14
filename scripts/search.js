@@ -19,6 +19,8 @@ let searchTime = 0;
 let modal = document.getElementById("gifModal");
 let modalImg = document.getElementById("gifMaximized");
 let modalClose = document.getElementById("modalClose");
+let sliderButtonPrev = document.getElementById("prevGif");
+let sliderButtonNext = document.getElementById("nextGif");
 
 let arrayResultsGif = [];
 
@@ -73,6 +75,17 @@ imgVerMasButton.onmouseleave = () => {
 modalClose.addEventListener("click", () => {
     modal.style.display = "none";
 })
+
+sliderButtonNext.onmouseover = () => {
+    sliderButtonNext.src = "/images/button-slider-right-hover.svg";
+}
+
+sliderButtonNext.onmouseleave = () => {
+    sliderButtonNext.src = "/images/button-slider-right.svg";
+
+}
+
+
 
 ///////////////////////////
 //Fin de captura de eventos
@@ -162,6 +175,10 @@ function getGifInfo(gifId) {
     return arrayResultsGif.find(gif => gif.id === gifId);
 }
 
+function getGifIndexOf(gifId) {
+    return arrayResultsGif.findIndex(gif => gif.id === gifId)
+}
+
 function loadAndPutSearchedGifs(searchValue, offset) {
     buscarGif(searchValue, offset)
         .then(array => {
@@ -223,17 +240,17 @@ function createCardForGif(userFromApi, titleFromApi, idFromApi, gifUrl) {
     actionIcons.className = "actionIcons";
 
     let icon;
-    let buttonText = "Favorito";
-    let imgSrc = "";
-    let imgSrcHover = "";
+    // let buttonText = "Favorito";
+    // let imgSrc = "";
+    // let imgSrcHover = "";
 
-    if (checkIsFavoriteGif(idFromApi)) {
-        imgSrc = "/images/icon-fav-active.svg"
-        imgSrcHover = imgSrc;
-    } else {
-        imgSrc = "/images/icon-fav.svg";
-        imgSrcHover = "/images/icon-fav-hover.svg"
-    }
+    // if (checkIsFavoriteGif(idFromApi)) {
+    //     imgSrc = "/images/icon-fav-active.svg"
+    //     imgSrcHover = imgSrc;
+    // } else {
+    //     imgSrc = "/images/icon-fav.svg";
+    //     imgSrcHover = "/images/icon-fav-hover.svg"
+    // }
 
     //Creo el icono para agregar a "Mis Favoritos" el gif.
     //icon = createActionIconForGifCard(buttonText, imgSrc, imgSrcHover, idFromApi)
@@ -305,38 +322,38 @@ function createFavoriteIconForGifCard(idFromApi) {
 
 }
 
-function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi) {
-    let icon = document.createElement("div");
-    let button = document.createElement("input");
-    button.type = "button";
-    button.value = buttonValue;
-    button.className = "cardGifButton";
-    if (idFromApi != "") {
-        button.id = idFromApi;
-    } else {
-        button.id = `button${buttonValue}`;
-    }
+// function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi) {
+//     let icon = document.createElement("div");
+//     let button = document.createElement("input");
+//     button.type = "button";
+//     button.value = buttonValue;
+//     button.className = "cardGifButton";
+//     if (idFromApi != "") {
+//         button.id = idFromApi;
+//     } else {
+//         button.id = `button${buttonValue}`;
+//     }
 
-    icon.appendChild(button);
+//     icon.appendChild(button);
 
-    let label = document.createElement("label");
-    label.className = "cardGifIcon"
-    label.setAttribute("for", button.id);
+//     let label = document.createElement("label");
+//     label.className = "cardGifIcon"
+//     label.setAttribute("for", button.id);
 
-    let img = document.createElement("img");
-    if (idFromApi != "") { //Si el valor de ID del gif desde la API no es nulo, signfica que se trata del icono para agregar/remover favoritos
-        img.setAttribute("onclick", `src=addOrRemoveFavoriteGif("${idFromApi}")`);
-    }
-    img.src = imageSrc;
+//     let img = document.createElement("img");
+//     if (idFromApi != "") { //Si el valor de ID del gif desde la API no es nulo, signfica que se trata del icono para agregar/remover favoritos
+//         img.setAttribute("onclick", `src=addOrRemoveFavoriteGif("${idFromApi}")`);
+//     }
+//     img.src = imageSrc;
 
 
-    img.alt = buttonValue;
+//     img.alt = buttonValue;
 
-    label.appendChild(img);
-    icon.appendChild(label);
+//     label.appendChild(img);
+//     icon.appendChild(label);
 
-    return icon;
-}
+//     return icon;
+// }
 
 
 function createMaximizeIconForGifCard(gifId) {
@@ -373,8 +390,57 @@ function createMaximizeIconForGifCard(gifId) {
 
 
 function maximizeGif(gifId) {
-    gif = getGifInfo(gifId);
+    let gifArrayLength = arrayResultsGif.length;
+    let gif = getGifInfo(gifId);
+    let indexOfGif = getGifIndexOf(gifId);
+
+    let sliderPrevDiv = document.getElementById("sliderPrevDiv");
+    sliderPrevDiv.innerHTML = "";
+    let sliderNextDiv = document.getElementById("sliderNextDiv");
+    sliderNextDiv.innerHTML = "";
+
+    if (indexOfGif != 0) { //Evaluo esta condicion para saber si es el inicio del array, caso en el que no dibujaria el boton previo
+        let gifIdPrev = arrayResultsGif[indexOfGif - 1].id;
+        let sliderButtonPrev = document.createElement("img");
+        sliderButtonPrev.className = "sliderButton";
+        sliderButtonPrev.id = "prevGif";
+        sliderButtonPrev.src = "/images/button-slider-left.svg";
+        sliderButtonPrev.alt = "Anterior";
+        sliderButtonPrev.setAttribute("onclick", `maximizeGif("${gifIdPrev}")`);
+        sliderPrevDiv.appendChild(sliderButtonPrev);
+        console.log("ID Previo: " + gifIdPrev);
+        sliderButtonPrev.onmouseover = () => {
+            sliderButtonPrev.src = "/images/button-slider-left-hover.svg";
+        }
+        sliderButtonPrev.onmouseleave = () => {
+            sliderButtonPrev.src = "/images/button-slider-left.svg";
+        }
+
+    }
+
+    if (indexOfGif != (gifArrayLength - 1)) { //Evaluo esta condicion para saber si es el final del array, caso en el que no dibujaria el boton siguiente
+        let gifIdNext = arrayResultsGif[indexOfGif + 1].id;
+        let sliderButtonNext = document.createElement("img");
+
+        sliderButtonNext.className = "sliderButton";
+        sliderButtonNext.id = "nextGif";
+        sliderButtonNext.src = "/images/button-slider-right.svg";
+        sliderButtonNext.alt = "Siguiente";
+        sliderButtonNext.setAttribute("onclick", `maximizeGif("${gifIdNext}")`);
+        sliderNextDiv.appendChild(sliderButtonNext);
+        console.log("ID Siguiente: " + gifIdNext);
+
+        sliderButtonNext.onmouseover = () => {
+            sliderButtonNext.src = "/images/button-slider-right-hover.svg";
+        }
+        sliderButtonNext.onmouseleave = () => {
+            sliderButtonNext.src = "/images/button-slider-right.svg";
+        }
+    }
+
     console.log(gif);
+    console.log(indexOfGif);
+
     modalImg.src = gif.images.original.url;
     modal.style.display = "block";
     modalClose.style.width = `${modalImg.clientWidth}px`;

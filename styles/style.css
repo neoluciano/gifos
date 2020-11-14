@@ -444,6 +444,7 @@ footer p {
     opacity: 70%;
     height: 32px;
     width: 32px;
+    border: 1px solid #9CAFC3;
 }
 
 .cardGifIcon:hover {
@@ -557,7 +558,7 @@ footer p {
     /* Full height */
     overflow: auto !important;
     /* Enable scroll if needed */
-    background-color: rgba(255, 255, 255, 0.90);
+    background-color: rgba(255, 255, 255, 1.0);
     /* Fallback color */
 }
 
@@ -566,7 +567,6 @@ footer p {
     flex-direction: column;
     /* justify-content: center; */
     align-items: center;
-    border: 1px solid red;
     /* overflow-y: auto !important; */
 }
 
@@ -574,6 +574,11 @@ footer p {
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.sliderButton {
+    cursor: pointer;
+    /* margin: 25px; */
 }
 
 #modalClose {
@@ -590,7 +595,7 @@ footer p {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: 1px solid rebeccapurple;
+    margin-top: 27px;
 }
 
 #buttonsGifMaximized {
@@ -600,13 +605,13 @@ footer p {
 }
 
 #underGifMaximized p:first-child {
-    font-family: 'Roboto-Regular';
+    font-family: 'Roboto', sans-serif;
     font-size: 15px;
     color: #000000;
 }
 
 #underGifMaximized p:last-child {
-    font-family: 'Roboto-Bold';
+    font-family: 'Roboto', sans-serif;
     font-weight: bold;
     font-size: 16px;
     color: #000000;
@@ -729,5 +734,12 @@ footer p {
     #gifMaximized {
         width: 695px;
         height: 385px;
+    }
+    #underGifMaximized {
+        width: 695px;
+    }
+    .sliderButtonDiv {
+        width: 40px;
+        margin: 25px;
     }
 }
