@@ -580,6 +580,13 @@ footer p {
     /* width: 50%; */
 }
 
+#underGifMaximized {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid rebeccapurple;
+}
+
 @media screen and (min-width: 640px) {
     header {
         display: flex;
@@ -693,5 +700,9 @@ footer p {
         color: #572EE5;
         text-align: center;
         line-height: 30px;
+    }
+    #gifMaximized {
+        width: 695px;
+        height: 385px;
     }
 }

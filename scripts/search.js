@@ -20,6 +20,8 @@ let modal = document.getElementById("gifModal");
 let modalImg = document.getElementById("gifMaximized");
 let modalClose = document.getElementById("modalClose");
 
+let arrayResultsGif = [];
+
 
 //Captura de Eventos
 ////////////////////
@@ -135,11 +137,29 @@ function autoCompleteAreaStyle(status) {
 
 }
 
+
+
 async function buscarGif(searchValue, offset) {
     let url = giphyEndpointSearch + "api_key=" + giphyApiKey + "&q=" + searchValue + "&limit=" + resultsLimit + "&offset=" + offset;
     let response = await fetch(url);
     let resultArray = await response.json();
+
+    if (offset === 0) {
+        console.log("Entro por offset 0");
+        arrayResultsGif = resultArray.data;
+    } else {
+        console.log(`Entro por offset ${offset}`);
+        arrayResultsGif = arrayResultsGif.concat(resultArray.data);
+    }
+
+    console.log("El array temporal contiene lo siguiente: ")
+    console.log(arrayResultsGif);
+
     return resultArray; //retorna un array con los resultados de busqueda
+}
+
+function getGifInfo(gifId) {
+    return arrayResultsGif.find(gif => gif.id === gifId);
 }
 
 function loadAndPutSearchedGifs(searchValue, offset) {
@@ -228,7 +248,7 @@ function createCardForGif(userFromApi, titleFromApi, idFromApi, gifUrl) {
     // imgSrcHover = "/images/icon-max-hover.svg";
 
     //Creo el icono para maximizar el Gif
-    icon = createMaximizeIconForGifCard(gifUrl);
+    icon = createMaximizeIconForGifCard(idFromApi);
     actionIcons.appendChild(icon);
 
     let cardGifDescription = document.createElement("div");
@@ -283,7 +303,7 @@ function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi
 }
 
 
-function createMaximizeIconForGifCard(gifUrl) {
+function createMaximizeIconForGifCard(gifId) {
     let imageSrc = "/images/icon-max-normal.svg";
     let icon = document.createElement("div");
     let button = document.createElement("input");
@@ -300,7 +320,7 @@ function createMaximizeIconForGifCard(gifUrl) {
     label.setAttribute("for", button.id);
 
     let img = document.createElement("img");
-    img.setAttribute("onclick", `maximizeGif("${gifUrl}")`);
+    img.setAttribute("onclick", `maximizeGif("${gifId}")`);
 
     // if (idFromApi != "") { //Si el valor de ID del gif desde la API no es nulo, signfica que se trata del icono para agregar/remover favoritos
     //     img.setAttribute("onclick", `src=addOrRemoveFavoriteGif("${idFromApi}")`);
@@ -316,11 +336,26 @@ function createMaximizeIconForGifCard(gifUrl) {
 }
 
 
-function maximizeGif(gifUrl) {
-    modalImg.src = gifUrl;
+function maximizeGif(gifId) {
+    gif = getGifInfo(gifId);
+    console.log(gif);
+    modalImg.src = gif.images.original.url;
     modal.style.display = "block";
     modalClose.style.width = `${modalImg.clientWidth}px`;
     console.log(modalImg.clientWidth);
+    userTitleGifMaximized = document.getElementById("userTitleGifMaximized");
+    userTitleGifMaximized.innerHTML = "";
+    buttonsGifMaximized = document.getElementById("buttonsGifMaximized");
+    buttonsGifMaximized.innerHTML = "";
+    user = document.createElement("p");
+    title = document.createElement("p");
+    user.innerHTML = gif.username;
+    title.innerHTML = gif.title;
+    userTitleGifMaximized.appendChild(user);
+    userTitleGifMaximized.appendChild(title);
+
+    icon = createDownloadIconForGifCard(gif.images.original.url);
+    buttonsGifMaximized.appendChild(icon);
 
 }
 
