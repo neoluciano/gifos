@@ -570,6 +570,12 @@ footer p {
     /* overflow-y: auto !important; */
 }
 
+#gifMaximizedContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 #modalClose {
     display: flex;
     flex-direction: row;
@@ -585,6 +591,25 @@ footer p {
     flex-direction: row;
     justify-content: space-between;
     border: 1px solid rebeccapurple;
+}
+
+#buttonsGifMaximized {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+}
+
+#underGifMaximized p:first-child {
+    font-family: 'Roboto-Regular';
+    font-size: 15px;
+    color: #000000;
+}
+
+#underGifMaximized p:last-child {
+    font-family: 'Roboto-Bold';
+    font-weight: bold;
+    font-size: 16px;
+    color: #000000;
 }
 
 @media screen and (min-width: 640px) {

@@ -236,7 +236,8 @@ function createCardForGif(userFromApi, titleFromApi, idFromApi, gifUrl) {
     }
 
     //Creo el icono para agregar a "Mis Favoritos" el gif.
-    icon = createActionIconForGifCard(buttonText, imgSrc, imgSrcHover, idFromApi)
+    //icon = createActionIconForGifCard(buttonText, imgSrc, imgSrcHover, idFromApi)
+    icon = createFavoriteIconForGifCard(idFromApi);
     actionIcons.appendChild(icon);
 
     //Creo el Icono para descargar el gif.
@@ -267,6 +268,41 @@ function createCardForGif(userFromApi, titleFromApi, idFromApi, gifUrl) {
     cardGifDescription.appendChild(title);
 
     return cardGif;
+}
+
+function createFavoriteIconForGifCard(idFromApi) {
+    let icon = document.createElement("div");
+    let button = document.createElement("input");
+    let buttonValue = 'Favorito'
+
+    button.type = "button";
+    button.value = buttonValue;
+    button.className = "cardGifButton";
+    button.id = idFromApi;
+
+    icon.appendChild(button);
+    let label = document.createElement("label");
+    label.className = "cardGifIcon"
+    label.setAttribute("for", button.id);
+    let img = document.createElement("img");
+    img.setAttribute("onclick", `src=addOrRemoveFavoriteGif("${idFromApi}")`);
+
+    let imgSrc = "";
+    if (checkIsFavoriteGif(idFromApi)) {
+        imgSrc = "/images/icon-fav-active.svg"
+        imgSrcHover = imgSrc;
+    } else {
+        imgSrc = "/images/icon-fav.svg";
+        imgSrcHover = "/images/icon-fav-hover.svg"
+    }
+
+    img.src = imgSrc;
+    img.alt = buttonValue;
+    label.appendChild(img);
+    icon.appendChild(label);
+
+    return icon;
+
 }
 
 function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi) {
@@ -354,7 +390,9 @@ function maximizeGif(gifId) {
     userTitleGifMaximized.appendChild(user);
     userTitleGifMaximized.appendChild(title);
 
-    icon = createDownloadIconForGifCard(gif.images.original.url);
+    let icon = createDownloadIconForGifCard(gif.images.original.url);
+    buttonsGifMaximized.appendChild(icon);
+    icon = createFavoriteIconForGifCard(gifId)
     buttonsGifMaximized.appendChild(icon);
 
 }
