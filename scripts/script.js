@@ -50,19 +50,19 @@ observer.observe(document.querySelector("#header-top"));
 ////////////////////
 
 imgCreateGifo.onmouseover = () => {
-    imgCreateGifo.src = "/images/CTA-crear-gifo-hover.svg";
+    imgCreateGifo.src = "images/CTA-crear-gifo-hover.svg";
 }
 
 imgCreateGifo.onmouseleave = () => {
-    imgCreateGifo.src = "/images/button-crear-gifo.svg";
+    imgCreateGifo.src = "images/button-crear-gifo.svg";
 }
 
 imgCreateGifo.onmousedown = () => {
-    imgCreateGifo.src = "/images/CTA-crear-gifo-active.svg";
+    imgCreateGifo.src = "images/CTA-crear-gifo-active.svg";
 }
 
 imgCreateGifo.onmouseup = () => {
-    imgCreateGifo.src = "/images/CTA-crear-gifo-hover.svg";
+    imgCreateGifo.src = "images/CTA-crear-gifo-hover.svg";
 }
 
 

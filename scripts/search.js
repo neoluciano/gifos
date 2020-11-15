@@ -65,11 +65,11 @@ verMasButton.addEventListener("click", () => {
 })
 
 imgVerMasButton.onmouseover = () => {
-    imgVerMasButton.src = "/images/CTA-ver-mas-hover.svg";
+    imgVerMasButton.src = "images/CTA-ver-mas-hover.svg";
 }
 
 imgVerMasButton.onmouseleave = () => {
-    imgVerMasButton.src = "/images/CTA-ver-mas.svg";
+    imgVerMasButton.src = "images/CTA-ver-mas.svg";
 }
 
 modalClose.addEventListener("click", () => {
@@ -77,11 +77,11 @@ modalClose.addEventListener("click", () => {
 })
 
 sliderButtonNext.onmouseover = () => {
-    sliderButtonNext.src = "/images/button-slider-right-hover.svg";
+    sliderButtonNext.src = "images/button-slider-right-hover.svg";
 }
 
 sliderButtonNext.onmouseleave = () => {
-    sliderButtonNext.src = "/images/button-slider-right.svg";
+    sliderButtonNext.src = "images/button-slider-right.svg";
 
 }
 
@@ -106,7 +106,7 @@ function autocompletResults(term) {
 
                 let autoImage = document.createElement("img");
                 autoImage.className = "autoImage";
-                autoImage.src = "/images/icon-search.svg";
+                autoImage.src = "images/icon-search.svg";
                 autoImage.alt = `Buscar ${item.name}`;
 
                 let suggestion = document.createElement("div");
@@ -285,11 +285,11 @@ function createFavoriteIconForGifCard(idFromApi) {
 
     let imgSrc = "";
     if (checkIsFavoriteGif(idFromApi)) {
-        imgSrc = "/images/icon-fav-active.svg"
+        imgSrc = "images/icon-fav-active.svg"
         imgSrcHover = imgSrc;
     } else {
-        imgSrc = "/images/icon-fav.svg";
-        imgSrcHover = "/images/icon-fav-hover.svg"
+        imgSrc = "images/icon-fav.svg";
+        imgSrcHover = "images/icon-fav-hover.svg"
     }
 
     img.src = imgSrc;
@@ -302,7 +302,7 @@ function createFavoriteIconForGifCard(idFromApi) {
 }
 
 function createMaximizeIconForGifCard(gifId) {
-    let imageSrc = "/images/icon-max-normal.svg";
+    let imageSrc = "images/icon-max-normal.svg";
     let icon = document.createElement("div");
     let button = document.createElement("input");
     button.type = "button";
@@ -345,16 +345,16 @@ function maximizeGif(gifId) {
         let sliderButtonPrev = document.createElement("img");
         sliderButtonPrev.className = "sliderButton";
         sliderButtonPrev.id = "prevGif";
-        sliderButtonPrev.src = "/images/button-slider-left.svg";
+        sliderButtonPrev.src = "images/button-slider-left.svg";
         sliderButtonPrev.alt = "Anterior";
         sliderButtonPrev.setAttribute("onclick", `maximizeGif("${gifIdPrev}")`);
         sliderPrevDiv.appendChild(sliderButtonPrev);
         console.log("ID Previo: " + gifIdPrev);
         sliderButtonPrev.onmouseover = () => {
-            sliderButtonPrev.src = "/images/button-slider-left-hover.svg";
+            sliderButtonPrev.src = "images/button-slider-left-hover.svg";
         }
         sliderButtonPrev.onmouseleave = () => {
-            sliderButtonPrev.src = "/images/button-slider-left.svg";
+            sliderButtonPrev.src = "images/button-slider-left.svg";
         }
 
     }
@@ -365,17 +365,17 @@ function maximizeGif(gifId) {
 
         sliderButtonNext.className = "sliderButton";
         sliderButtonNext.id = "nextGif";
-        sliderButtonNext.src = "/images/button-slider-right.svg";
+        sliderButtonNext.src = "images/button-slider-right.svg";
         sliderButtonNext.alt = "Siguiente";
         sliderButtonNext.setAttribute("onclick", `maximizeGif("${gifIdNext}")`);
         sliderNextDiv.appendChild(sliderButtonNext);
         console.log("ID Siguiente: " + gifIdNext);
 
         sliderButtonNext.onmouseover = () => {
-            sliderButtonNext.src = "/images/button-slider-right-hover.svg";
+            sliderButtonNext.src = "images/button-slider-right-hover.svg";
         }
         sliderButtonNext.onmouseleave = () => {
-            sliderButtonNext.src = "/images/button-slider-right.svg";
+            sliderButtonNext.src = "images/button-slider-right.svg";
         }
     }
 
@@ -407,7 +407,7 @@ function maximizeGif(gifId) {
 
 //Funcion que genera el icono de descarga para embeber en las hoverCards
 function createDownloadIconForGifCard(gifUrl) {
-    let imgSrc = "/images/icon-download.svg";
+    let imgSrc = "images/icon-download.svg";
     let icon = document.createElement("div");
     let button = document.createElement("input");
     button.type = "button";
