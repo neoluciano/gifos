@@ -19,7 +19,7 @@
         <input type="checkbox" id="chk-menu">
         <div id="header-menu">
             <div id="logo">
-                <img id="img-logo" src="/images/logo-mobile.svg" alt="logo">
+                <img id="img-logo" src="images/logo-mobile.svg" alt="logo">
                 <div id="logo-text">
                     GIFOS
                 </div>
@@ -33,7 +33,7 @@
                 <li><a id="linkFavoritos">Favoritos</a></li>
                 <li><a href="">Mis GIFOS</a></li>
             </ul>
-            <img id="imgCreateGifo" src="/images/button-crear-gifo.svg" alt="Crear Gifo">
+            <img id="imgCreateGifo" src="images/button-crear-gifo.svg" alt="Crear Gifo">
         </nav>
     </header>
     <main>
@@ -42,7 +42,7 @@
         </section>
         <section class="searchSection" id="sectionSearch">
             <h3 id="buscaGifsH3">Busca GIFs y mas</h3>
-            <img src="/images/ilustra_header.svg" alt="gifos" id="imgIlustra">
+            <img src="images/ilustra_header.svg" alt="gifos" id="imgIlustra">
             <div class="searchBar" id="searchBar">
                 <div id="searchArea">
                     <div id="closeImageDiv">
@@ -141,9 +141,16 @@
         <section class="trendingGifs" id="trendingGifs">
             <h2>Trending GIFOS</h2>
             <p>Mira los últimos<br> GIFOS de nuestra comunidad.</p>
-            <div class="gifList" id="gifList">
-                <!-- Aqui se insertan los trending gifs -->
+            <div id="trendingGifContainer">
+                <div id="sliderTrendingPrevDiv" class="sliderButtonDiv"><img class="sliderButton" id="prevTrendingGif" src="/images/button-slider-left.svg" alt="Anterior"></div>
+
+                <div class="gifList" id="gifList">
+                    <!-- Aqui se insertan los trending gifs -->
+                </div>
+                <div id="sliderTrendingNextDiv" class="sliderButtonDiv"><img class="sliderButton" id="nextTrendingGif" src="/images/button-slider-right.svg" alt="Siguiente"></div>
+
             </div>
+
         </section>
     </main>
     <footer>

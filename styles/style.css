@@ -312,7 +312,6 @@ main {
     margin-top: 45px;
     background-color: #F3F5F8;
     padding-bottom: 50px;
-    overflow: hidden;
 }
 
 .trendingGifs h2 {
@@ -335,6 +334,9 @@ main {
     margin-top: 32px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    overflow: hidden;
+    border: 1px solid red;
 }
 
 .trendingGifsDark {
@@ -741,5 +743,15 @@ footer p {
     .sliderButtonDiv {
         width: 40px;
         margin: 25px;
+    }
+    #trendingGifContainer {
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+        border: 1px solid red;
+    }
+    .trendGifHome {
+        width: 357px;
+        height: 275px;
     }
 }

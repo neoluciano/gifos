@@ -85,8 +85,6 @@ sliderButtonNext.onmouseleave = () => {
 
 }
 
-
-
 ///////////////////////////
 //Fin de captura de eventos
 
@@ -149,8 +147,6 @@ function autoCompleteAreaStyle(status) {
     }
 
 }
-
-
 
 async function buscarGif(searchValue, offset) {
     let url = giphyEndpointSearch + "api_key=" + giphyApiKey + "&q=" + searchValue + "&limit=" + resultsLimit + "&offset=" + offset;
@@ -240,20 +236,6 @@ function createCardForGif(userFromApi, titleFromApi, idFromApi, gifUrl) {
     actionIcons.className = "actionIcons";
 
     let icon;
-    // let buttonText = "Favorito";
-    // let imgSrc = "";
-    // let imgSrcHover = "";
-
-    // if (checkIsFavoriteGif(idFromApi)) {
-    //     imgSrc = "/images/icon-fav-active.svg"
-    //     imgSrcHover = imgSrc;
-    // } else {
-    //     imgSrc = "/images/icon-fav.svg";
-    //     imgSrcHover = "/images/icon-fav-hover.svg"
-    // }
-
-    //Creo el icono para agregar a "Mis Favoritos" el gif.
-    //icon = createActionIconForGifCard(buttonText, imgSrc, imgSrcHover, idFromApi)
     icon = createFavoriteIconForGifCard(idFromApi);
     actionIcons.appendChild(icon);
 
@@ -261,9 +243,6 @@ function createCardForGif(userFromApi, titleFromApi, idFromApi, gifUrl) {
     icon = createDownloadIconForGifCard(gifUrl);
     actionIcons.appendChild(icon);
 
-    // buttonText = "Ampliar";
-    // imgSrc = "/images/icon-max-normal.svg";
-    // imgSrcHover = "/images/icon-max-hover.svg";
 
     //Creo el icono para maximizar el Gif
     icon = createMaximizeIconForGifCard(idFromApi);
@@ -322,40 +301,6 @@ function createFavoriteIconForGifCard(idFromApi) {
 
 }
 
-// function createActionIconForGifCard(buttonValue, imageSrc, imageHover, idFromApi) {
-//     let icon = document.createElement("div");
-//     let button = document.createElement("input");
-//     button.type = "button";
-//     button.value = buttonValue;
-//     button.className = "cardGifButton";
-//     if (idFromApi != "") {
-//         button.id = idFromApi;
-//     } else {
-//         button.id = `button${buttonValue}`;
-//     }
-
-//     icon.appendChild(button);
-
-//     let label = document.createElement("label");
-//     label.className = "cardGifIcon"
-//     label.setAttribute("for", button.id);
-
-//     let img = document.createElement("img");
-//     if (idFromApi != "") { //Si el valor de ID del gif desde la API no es nulo, signfica que se trata del icono para agregar/remover favoritos
-//         img.setAttribute("onclick", `src=addOrRemoveFavoriteGif("${idFromApi}")`);
-//     }
-//     img.src = imageSrc;
-
-
-//     img.alt = buttonValue;
-
-//     label.appendChild(img);
-//     icon.appendChild(label);
-
-//     return icon;
-// }
-
-
 function createMaximizeIconForGifCard(gifId) {
     let imageSrc = "/images/icon-max-normal.svg";
     let icon = document.createElement("div");
@@ -374,10 +319,6 @@ function createMaximizeIconForGifCard(gifId) {
 
     let img = document.createElement("img");
     img.setAttribute("onclick", `maximizeGif("${gifId}")`);
-
-    // if (idFromApi != "") { //Si el valor de ID del gif desde la API no es nulo, signfica que se trata del icono para agregar/remover favoritos
-    //     img.setAttribute("onclick", `src=addOrRemoveFavoriteGif("${idFromApi}")`);
-    // }
 
     img.src = imageSrc;
     img.alt = button.value;
