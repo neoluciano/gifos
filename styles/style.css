@@ -331,12 +331,13 @@ main {
 }
 
 .gifList {
+    width: 80vw;
     margin-top: 32px;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     overflow: hidden;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 .trendingGifsDark {
@@ -619,6 +620,11 @@ footer p {
     color: #000000;
 }
 
+.container-gifList {
+    overflow: hidden;
+    border: 1px solid yellow;
+}
+
 @media screen and (min-width: 640px) {
     header {
         display: flex;
@@ -747,11 +753,15 @@ footer p {
     #trendingGifContainer {
         display: flex;
         flex-direction: row;
+        justify-content: center;
+        align-items: center;
         overflow: hidden;
-        border: 1px solid red;
+        /* border: 1px solid red; */
     }
     .trendGifHome {
         width: 357px;
         height: 275px;
+        margin-right: 27px;
+        transition: all 1s ease;
     }
 }

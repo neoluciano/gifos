@@ -21,6 +21,11 @@ let modalImg = document.getElementById("gifMaximized");
 let modalClose = document.getElementById("modalClose");
 let sliderButtonPrev = document.getElementById("prevGif");
 let sliderButtonNext = document.getElementById("nextGif");
+let gifList = document.getElementById("gifList");
+let nextTrendingGif = document.getElementById("nextTrendingGif");
+let prevTrendingGif = document.getElementById("prevTrendingGif");
+let offsetTrendGif = 0;
+
 
 let arrayResultsGif = [];
 
@@ -84,6 +89,39 @@ sliderButtonNext.onmouseleave = () => {
     sliderButtonNext.src = "images/button-slider-right.svg";
 
 }
+
+prevTrendingGif.addEventListener("click", () => {
+    if (offsetTrendGif != 0) {
+        let firstGifTrend = document.querySelectorAll(".trendGifHome");
+        console.log(firstGifTrend);
+
+        offsetTrendGif += 300;
+        console.log(offsetTrendGif);
+
+        for (let element of firstGifTrend) {
+            element.style.transform = `translateX(${offsetTrendGif}px)`;
+        }
+    }
+})
+
+nextTrendingGif.addEventListener("click", () => {
+
+        let firstGifTrend = document.querySelectorAll(".trendGifHome");
+        console.log(firstGifTrend);
+
+        offsetTrendGif -= 300;
+        console.log(offsetTrendGif);
+
+        for (let element of firstGifTrend) {
+            element.style.transform = `translateX(${offsetTrendGif}px)`;
+        }
+    }
+
+
+
+    // firstGifTrend.style.border = "1px solid yellow";
+    // firstGifTrend.style.transform = "translateX(-300px)";
+)
 
 ///////////////////////////
 //Fin de captura de eventos
