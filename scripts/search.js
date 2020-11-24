@@ -26,7 +26,7 @@ let nextTrendingGif = document.getElementById("nextTrendingGif");
 let prevTrendingGif = document.getElementById("prevTrendingGif");
 let offsetTrendGif = 0;
 
-
+let arrayGifMaximized = [];
 let arrayResultsGif = [];
 
 
@@ -219,11 +219,11 @@ async function buscarGif(searchValue, offset) {
 }
 
 function getGifInfo(gifId) {
-    return arrayResultsGif.find(gif => gif.id === gifId);
+    return arrayGifMaximized.find(gif => gif.id === gifId);
 }
 
 function getGifIndexOf(gifId) {
-    return arrayResultsGif.findIndex(gif => gif.id === gifId)
+    return arrayGifMaximized.findIndex(gif => gif.id === gifId)
 }
 
 function loadAndPutSearchedGifs(searchValue, offset) {
@@ -264,7 +264,7 @@ function loadAndPutSearchedGifs(searchValue, offset) {
                     newGif.alt = item.title;
                     newGif.className = "searchedGifsHome";
 
-                    let cardGif = createCardForGif(item.username, item.title, item.id, gifUrl);
+                    let cardGif = createCardForGif(item.username, item.title, item.id, gifUrl, "search");
 
                     resultSearchGifDiv.appendChild(newGif);
                     resultSearchGifDiv.appendChild(cardGif);
@@ -278,8 +278,11 @@ function loadAndPutSearchedGifs(searchValue, offset) {
         })
 }
 
-
-function createCardForGif(userFromApi, titleFromApi, idFromApi, gifUrl) {
+//Aqui creo la CARD que se muestra en el hover sobre cada gif.
+//El parametro "section" (string) hace referencia a la seccion donde esta el gif
+//para el cual se esta creando la card. Esto es para saber que array leer
+//cuando se llama al evento "Maximize Gif".
+function createCardForGif(userFromApi, titleFromApi, idFromApi, gifUrl, section) {
     let cardGif = document.createElement("div");
     cardGif.className = "cardGif";
 
@@ -296,7 +299,7 @@ function createCardForGif(userFromApi, titleFromApi, idFromApi, gifUrl) {
 
 
     //Creo el icono para maximizar el Gif
-    icon = createMaximizeIconForGifCard(idFromApi);
+    icon = createMaximizeIconForGifCard(idFromApi, section);
     actionIcons.appendChild(icon);
 
     let cardGifDescription = document.createElement("div");
@@ -352,7 +355,7 @@ function createFavoriteIconForGifCard(idFromApi) {
 
 }
 
-function createMaximizeIconForGifCard(gifId) {
+function createMaximizeIconForGifCard(gifId, section) {
     let imageSrc = "images/icon-max-normal.svg";
     let icon = document.createElement("div");
     let button = document.createElement("input");
@@ -369,7 +372,8 @@ function createMaximizeIconForGifCard(gifId) {
     label.setAttribute("for", button.id);
 
     let img = document.createElement("img");
-    img.setAttribute("onclick", `maximizeGif("${gifId}")`);
+
+    img.setAttribute("onclick", `maximizeGif("${gifId}", "${section}")`);
 
     img.src = imageSrc;
     img.alt = button.value;
@@ -381,8 +385,17 @@ function createMaximizeIconForGifCard(gifId) {
 }
 
 
-function maximizeGif(gifId) {
-    let gifArrayLength = arrayResultsGif.length;
+function maximizeGif(gifId, section) {
+    console.log("Section por param: ")
+    console.log(section);
+
+    if (section === "search") {
+        arrayGifMaximized = arrayResultsGif;
+    } else if (section === "trend") {
+        arrayGifMaximized = arrayResultsTrendGif;
+    }
+
+    let gifArrayLength = arrayGifMaximized.length;
     let gif = getGifInfo(gifId);
     let indexOfGif = getGifIndexOf(gifId);
 
@@ -392,7 +405,7 @@ function maximizeGif(gifId) {
     sliderNextDiv.innerHTML = "";
 
     if (indexOfGif != 0) { //Evaluo esta condicion para saber si es el inicio del array, caso en el que no dibujaria el boton previo
-        let gifIdPrev = arrayResultsGif[indexOfGif - 1].id;
+        let gifIdPrev = arrayGifMaximized[indexOfGif - 1].id;
         let sliderButtonPrev = document.createElement("img");
         sliderButtonPrev.className = "sliderButton";
         sliderButtonPrev.id = "prevGif";
@@ -411,7 +424,7 @@ function maximizeGif(gifId) {
     }
 
     if (indexOfGif != (gifArrayLength - 1)) { //Evaluo esta condicion para saber si es el final del array, caso en el que no dibujaria el boton siguiente
-        let gifIdNext = arrayResultsGif[indexOfGif + 1].id;
+        let gifIdNext = arrayGifMaximized[indexOfGif + 1].id;
         let sliderButtonNext = document.createElement("img");
 
         sliderButtonNext.className = "sliderButton";

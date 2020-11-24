@@ -18,6 +18,8 @@ let headerPosition = "noFixed";
 let logo = document.getElementById("logo");
 let logoText = document.getElementById("logo-text");
 
+let arrayResultsTrendGif = [];
+
 
 
 //Llamado a funciones que se ejecutan al cargar la HOME
@@ -122,6 +124,11 @@ async function trendingSearchGifs() {
     let url = giphyTrendingSearchGifs + "api_key=" + giphyApiKey + "&limit=21";
     let response = await fetch(url);
     let json = await response.json();
+
+    //Asigno el resultado en un array temporal para poder utilizarlo en la funcion de Maximize
+    arrayResultsTrendGif = json.data;
+    console.log(arrayResultsTrendGif);
+
     return json;
 }
 
@@ -138,7 +145,7 @@ function loadAndPutTrendingGifs() {
                 newGif.alt = item.title;
                 newGif.className = "trendGifHome";
 
-                let cardGif = createCardForGif(item.username, item.title, item.id, gifUrl)
+                let cardGif = createCardForGif(item.username, item.title, item.id, gifUrl, "trend")
 
                 resultTrendGif.appendChild(newGif);
                 resultTrendGif.appendChild(cardGif);
