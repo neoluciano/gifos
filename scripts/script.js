@@ -119,7 +119,7 @@ function loadAndPutTrendingTerms() {
 }
 
 async function trendingSearchGifs() {
-    let url = giphyTrendingSearchGifs + "api_key=" + giphyApiKey + "&limit=10";
+    let url = giphyTrendingSearchGifs + "api_key=" + giphyApiKey + "&limit=21";
     let response = await fetch(url);
     let json = await response.json();
     return json;
@@ -130,12 +130,19 @@ function loadAndPutTrendingGifs() {
         .then(array => {
 
             for (item of array.data) {
-
+                let resultTrendGif = document.createElement("div");
+                resultTrendGif.className = "resultTrendGif";
+                let gifUrl = item.images.original.url;
                 let newGif = document.createElement('img');
                 newGif.src = item.images.original.url;
                 newGif.alt = item.title;
                 newGif.className = "trendGifHome";
-                trendingGifsList.appendChild(newGif);
+
+                let cardGif = createCardForGif(item.username, item.title, item.id, gifUrl)
+
+                resultTrendGif.appendChild(newGif);
+                resultTrendGif.appendChild(cardGif);
+                trendingGifsList.appendChild(resultTrendGif);
             }
         }).catch(error => {
             console.error("Se produjo el error siguiente: " + error);

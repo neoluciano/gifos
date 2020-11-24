@@ -330,14 +330,24 @@ main {
     line-height: 23px;
 }
 
-.gifList {
+
+/* .gifList {
     width: 80vw;
     margin-top: 32px;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     overflow: hidden;
-    /* border: 1px solid red; */
+} */
+
+.gifList {
+    width: 80vw;
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(21, 1fr);
+    grid-template-rows: 1fr;
+    gap: 15px;
+    overflow: hidden;
 }
 
 .trendingGifsDark {
@@ -395,6 +405,21 @@ footer p {
 .resultSearchGifDiv {
     position: relative;
     width: 100%;
+}
+
+.resultSearchGifDiv:hover .cardGif {
+    opacity: 0.8;
+}
+
+.resultTrendGif {
+    position: relative;
+    width: 100%;
+    transition: all 1s ease;
+    /* margin-right: 27px; */
+}
+
+.resultTrendGif:hover .cardGif {
+    opacity: 0.8;
 }
 
 .noResultsDiv {
@@ -456,10 +481,6 @@ footer p {
 
 .cardGifButton {
     display: none;
-}
-
-.resultSearchGifDiv:hover .cardGif {
-    opacity: 0.8;
 }
 
 .cardGifDescription {
@@ -759,9 +780,10 @@ footer p {
         /* border: 1px solid red; */
     }
     .trendGifHome {
+        display: block;
         width: 357px;
         height: 275px;
-        margin-right: 27px;
+        /* margin-right: 27px; */
         transition: all 1s ease;
     }
 }
