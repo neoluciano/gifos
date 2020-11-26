@@ -103,12 +103,9 @@
                     </div> -->
                     <!-- aqui se dibujan los gifs resultados de una busqueda -->
                 </div>
-                <!-- aqui estaba antes el gifModal -->
-
                 <input type="button" value="Ver Mas" id="verMasButton">
                 <label id="labelVerMasButton" class="button" for="verMasButton"><img id="imgVerMasButton" src="images/CTA-ver-mas.svg" alt="Ver Mas"></label>
             </div>
-
             <div id="gifModal" class="modal">
                 <div id="modal-content">
                     <div id="modalClose"><img src="images/close.svg" alt="Cerrar"></div>
@@ -143,7 +140,7 @@
 
         <section class="trendingGifs" id="trendingGifs">
             <h2>Trending GIFOS</h2>
-            <p>Mira los últimos<br> GIFOS de nuestra comunidad.</p>
+            <p id="trendP">Mira los últimos<br> GIFOS de nuestra comunidad.</p>
             <div id="trendingGifContainer">
                 <div id="sliderTrendingPrevDiv" class="sliderButtonDiv"><img class="sliderButton" id="prevTrendingGif" src="images/button-slider-left.svg" alt="Anterior"></div>
 
@@ -165,6 +162,12 @@
             <a target="_blank" href="http://www.instagram.com"><i class="fa fa-instagram fa-lg"></i></a>
         </div>
         <p>© GIFOS 2020 All Rights Reserved.</p>
+
+        <p ontouchmove="myFunction(event)">Touch this paragraph, and move the finger to trigger a function that will display the x and y coordinates of the touch, according the the document:</p>
+
+        <p><strong>Note:</strong> This example is for touch devices only.</p>
+
+        <p id="demo"></p>
     </footer>
     <script src="scripts/script.js"></script>
     <script src="scripts/search.js"></script>

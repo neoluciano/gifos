@@ -17,6 +17,7 @@ let header = document.getElementById("header");
 let headerPosition = "noFixed";
 let logo = document.getElementById("logo");
 let logoText = document.getElementById("logo-text");
+let touchMoveReference = 0;
 
 let arrayResultsTrendGif = [];
 
@@ -91,6 +92,21 @@ logo.addEventListener("click", () => {
 //Fin de captura de eventos
 
 
+function gifTouchMoveEvent(event) {
+    let x = event.touches[0].clientX;
+    let y = event.touches[0].clientY;
+    if (x > touchMoveReference) {
+        console.log("Derecha");
+        touchMoveReference = x;
+    } else {
+        console.log("Izquierda");
+        touchMoveReference = x;
+
+    }
+    console.log("Se llamo al evento.")
+    console.log(x + ", " + y);
+}
+
 
 async function trendingSearchTerms() {
     let url = giphyTrendingSearchTerms + "api_key=" + giphyApiKey;
@@ -145,7 +161,17 @@ function loadAndPutTrendingGifs() {
                 newGif.alt = item.title;
                 newGif.className = "trendGifHome";
 
+                newGif.addEventListener("touchmove", (e) => {
+                    console.log("Evento lanzado!");
+                    gifTouchMoveEvent(e);
+                });
+
                 let cardGif = createCardForGif(item.username, item.title, item.id, gifUrl, "trend")
+
+                cardGif.addEventListener("touchmove", (e) => {
+                    console.log("Evento lanzado!");
+                    gifTouchMoveEvent(e);
+                });
 
                 resultTrendGif.appendChild(newGif);
                 resultTrendGif.appendChild(cardGif);
@@ -154,4 +180,10 @@ function loadAndPutTrendingGifs() {
         }).catch(error => {
             console.error("Se produjo el error siguiente: " + error);
         })
+}
+
+function myFunction(event) {
+    var x = event.touches[0].clientX;
+    var y = event.touches[0].clientY;
+    document.getElementById("demo").innerHTML = x + ", " + y;
 }

@@ -217,7 +217,7 @@ main {
     justify-content: space-between;
     align-items: center;
     color: #9CAFC3;
-    font-family: 'Roboto-Regular';
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     margin-bottom: 5px;
     cursor: pointer;
@@ -321,9 +321,9 @@ main {
     color: #572EE5;
 }
 
-.trendingGifs p {
+#trendP {
     margin-top: 7px;
-    font-family: 'Roboto-Regular';
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     color: #000000;
     text-align: center;
@@ -484,6 +484,8 @@ footer p {
 }
 
 .cardGifDescription {
+    font-family: 'Roboto', sans-serif;
+    margin-top: 35%;
     margin-left: 5px;
     color: white;
 }
