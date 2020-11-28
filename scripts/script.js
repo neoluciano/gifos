@@ -19,7 +19,7 @@ let logo = document.getElementById("logo");
 let logoText = document.getElementById("logo-text");
 let touchMoveReference = 0;
 let touchMoveStar = 0;
-let touchMoveEnd = 0;
+let touchMoveEnd = true;
 
 let arrayResultsTrendGif = [];
 
@@ -99,21 +99,24 @@ function gifTouchMoveEvent(event) {
 
     let x = event.touches[0].clientX;
     let y = event.touches[0].clientY;
-    if (x > touchMoveReference) {
-        console.log("Derecha");
-        carouselEvent("left", (x - touchMoveStar));
+    if (touchMoveEnd) {
+        if (x > touchMoveStar) {
+            console.log("Derecha");
+            carouselEvent("left", 0);
+            touchMoveReference = x;
+            touchMoveEnd = false;
 
-        touchMoveReference = x;
+        } else {
+            console.log("Izquierda");
+            carouselEvent("right", 0);
 
-    } else {
-        console.log("Izquierda");
-        carouselEvent("right", (touchMoveStar - x));
-
-        touchMoveReference = x;
-
+            touchMoveReference = x;
+            touchMoveEnd = false;
+        }
     }
-    console.log("Se llamo al evento.")
-    console.log(x + ", " + y);
+
+    // console.log("Se llamo al evento.")
+    // console.log(x + ", " + y);
 }
 
 
@@ -180,9 +183,11 @@ function loadAndPutTrendingGifs() {
                 cardGif.ontouchstart = (e) => {
                     touchMoveStar = e.touches[0].clientX;
                     console.log(`El evento inicio en: ${touchMoveStar}`);
+                    // touchMoveEnd = false;
                 }
                 cardGif.ontouchend = () => {
                     console.log(`El evento FINALIZO`);
+                    touchMoveEnd = true;
 
                 }
                 cardGif.addEventListener("touchmove", (e) => {
