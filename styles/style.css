@@ -648,6 +648,10 @@ footer p {
     border: 1px solid yellow;
 }
 
+.sliderButtonDiv {
+    display: none;
+}
+
 @media screen and (min-width: 640px) {
     header {
         display: flex;
@@ -770,6 +774,7 @@ footer p {
         width: 695px;
     }
     .sliderButtonDiv {
+        display: block;
         width: 40px;
         margin: 25px;
     }
