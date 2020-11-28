@@ -92,13 +92,13 @@ sliderButtonNext.onmouseleave = () => {
 
 prevTrendingGif.addEventListener("click", () => {
 
-    carouselEvent("left");
+    carouselEvent("left", 0);
 
 })
 
 nextTrendingGif.addEventListener("click", () => {
 
-        carouselEvent("right");
+        carouselEvent("right", 0);
     }
 
 )
@@ -106,9 +106,15 @@ nextTrendingGif.addEventListener("click", () => {
 ///////////////////////////
 //Fin de captura de eventos
 
-function carouselEvent(direction) {
+function carouselEvent(direction, offset) {
+    let trendingGifWidth = 0;
+    if (offset != 0) {
+        trendingGifWidth = offset;
+    } else {
+        trendingGifWidth = (document.querySelector(".trendGifHome").clientWidth) + 15;
+
+    }
     //obtengo el ancho seteado de cada gif para hacer el calculo del limite de desplazamiento.
-    let trendingGifWidth = (document.querySelector(".trendGifHome").clientWidth) + 15;
     //Con el ancho de cada gif y la cantidad de gif totales -2 armo el numero maximo de desplazamiento en px.
     let maxDisplacement = trendingGifWidth * (gifList.childElementCount - 3)
 

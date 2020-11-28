@@ -97,13 +97,15 @@ function gifTouchMoveEvent(event) {
     let y = event.touches[0].clientY;
     if (x > touchMoveReference) {
         console.log("Derecha");
+        carouselEvent("left", (x - touchMoveReference));
+
         touchMoveReference = x;
-        carouselEvent("left");
 
     } else {
         console.log("Izquierda");
+        carouselEvent("right", (touchMoveReference - x));
+
         touchMoveReference = x;
-        carouselEvent("right");
 
     }
     console.log("Se llamo al evento.")
