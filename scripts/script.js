@@ -18,6 +18,8 @@ let headerPosition = "noFixed";
 let logo = document.getElementById("logo");
 let logoText = document.getElementById("logo-text");
 let touchMoveReference = 0;
+let touchMoveStar = 0;
+let touchMoveEnd = 0;
 
 let arrayResultsTrendGif = [];
 
@@ -93,17 +95,19 @@ logo.addEventListener("click", () => {
 
 
 function gifTouchMoveEvent(event) {
+
+
     let x = event.touches[0].clientX;
     let y = event.touches[0].clientY;
     if (x > touchMoveReference) {
         console.log("Derecha");
-        carouselEvent("left", (x - touchMoveReference));
+        carouselEvent("left", (x - touchMoveStar));
 
         touchMoveReference = x;
 
     } else {
         console.log("Izquierda");
-        carouselEvent("right", (touchMoveReference - x));
+        carouselEvent("right", (touchMoveStar - x));
 
         touchMoveReference = x;
 
@@ -173,8 +177,16 @@ function loadAndPutTrendingGifs() {
 
                 let cardGif = createCardForGif(item.username, item.title, item.id, gifUrl, "trend")
 
+                cardGif.ontouchstart = (e) => {
+                    touchMoveStar = e.touches[0].clientX;
+                    console.log(`El evento inicio en: ${touchMoveStar}`);
+                }
+                cardGif.ontouchend = () => {
+                    console.log(`El evento FINALIZO`);
+
+                }
                 cardGif.addEventListener("touchmove", (e) => {
-                    console.log("Evento lanzado!");
+                    // console.log("Evento lanzado!");
                     gifTouchMoveEvent(e);
                 });
 
