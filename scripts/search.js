@@ -91,53 +91,52 @@ sliderButtonNext.onmouseleave = () => {
 }
 
 prevTrendingGif.addEventListener("click", () => {
-    let trendingGifWidth = (document.querySelector(".trendGifHome").clientWidth) + 15;
 
-    if (offsetTrendGif != 0) {
-        let firstGifTrend = document.querySelectorAll(".resultTrendGif");
-        console.log(firstGifTrend);
+    carouselEvent("left");
 
-        offsetTrendGif += trendingGifWidth;
-        console.log(offsetTrendGif);
-
-        for (let element of firstGifTrend) {
-            element.style.transform = `translateX(${offsetTrendGif}px)`;
-        }
-    }
 })
 
 nextTrendingGif.addEventListener("click", () => {
 
-        console.log(gifList.clientWidth);
-        console.log(gifList.childElementCount);
-        //obtengo el ancho seteado de cada gif para hacer el calculo del limite de desplazamiento.
-        let trendingGifWidth = (document.querySelector(".trendGifHome").clientWidth) + 15;
+        carouselEvent("right");
+    }
 
-        //Con el ancho de cada gif y la cantidad de gif totales -2 armo el numero maximo de desplazamiento en px.
-        let maxDisplacement = trendingGifWidth * (gifList.childElementCount - 3)
+)
 
-        console.log(trendingGifWidth);
-        console.log(maxDisplacement);
+///////////////////////////
+//Fin de captura de eventos
 
+function carouselEvent(direction) {
+    //obtengo el ancho seteado de cada gif para hacer el calculo del limite de desplazamiento.
+    let trendingGifWidth = (document.querySelector(".trendGifHome").clientWidth) + 15;
+    //Con el ancho de cada gif y la cantidad de gif totales -2 armo el numero maximo de desplazamiento en px.
+    let maxDisplacement = trendingGifWidth * (gifList.childElementCount - 3)
+
+    let firstGifTrend = document.querySelectorAll(".resultTrendGif");
+
+    if (direction === "right") {
         if (offsetTrendGif > (-maxDisplacement)) {
-
-            let firstGifTrend = document.querySelectorAll(".resultTrendGif");
-            console.log(firstGifTrend);
-
             offsetTrendGif -= trendingGifWidth;
-            console.log(offsetTrendGif);
 
             for (let element of firstGifTrend) {
                 element.style.transform = `translateX(${offsetTrendGif}px)`;
             }
         }
-    }
-    // firstGifTrend.style.border = "1px solid yellow";
-    // firstGifTrend.style.transform = "translateX(-300px)";
-)
 
-///////////////////////////
-//Fin de captura de eventos
+    } else if (direction === "left") {
+        if (offsetTrendGif != 0) {
+
+            offsetTrendGif += trendingGifWidth;
+
+            for (let element of firstGifTrend) {
+                element.style.transform = `translateX(${offsetTrendGif}px)`;
+            }
+        }
+
+    }
+
+}
+
 
 async function autocompleteSearch(term) {
     let url = giphyAutocomplete + "api_key=" + giphyApiKey + "&q=" + term;
