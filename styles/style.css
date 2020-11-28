@@ -407,19 +407,11 @@ footer p {
     width: 100%;
 }
 
-.resultSearchGifDiv:hover .cardGif {
-    opacity: 0.8;
-}
-
 .resultTrendGif {
     position: relative;
     width: 100%;
     transition: all 1s ease;
     /* margin-right: 27px; */
-}
-
-.resultTrendGif:hover .cardGif {
-    opacity: 0.8;
 }
 
 .noResultsDiv {
@@ -440,57 +432,6 @@ footer p {
     color: #50E3C2;
     text-align: center;
     line-height: 25px;
-    font-weight: bold;
-}
-
-.cardGif {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    transition: .5s ease;
-    background-color: #572EE5;
-}
-
-.actionIcons {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
-
-.cardGifIcon {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-    cursor: pointer;
-    background-color: #FFFFFF;
-    border-radius: 6px;
-    opacity: 70%;
-    height: 32px;
-    width: 32px;
-    border: 1px solid #9CAFC3;
-}
-
-.cardGifIcon:hover {
-    opacity: 100%;
-}
-
-.cardGifButton {
-    display: none;
-}
-
-.cardGifDescription {
-    font-family: 'Roboto', sans-serif;
-    margin-top: 35%;
-    margin-left: 5px;
-    color: white;
-}
-
-.tituloCardGifDescription {
     font-weight: bold;
 }
 
@@ -652,6 +593,10 @@ footer p {
     display: none;
 }
 
+.cardGif {
+    display: none;
+}
+
 @media screen and (min-width: 640px) {
     header {
         display: flex;
@@ -792,5 +737,56 @@ footer p {
         height: 275px;
         /* margin-right: 27px; */
         transition: all 1s ease;
+    }
+    .resultSearchGifDiv:hover .cardGif {
+        opacity: 0.8;
+    }
+    .resultTrendGif:hover .cardGif {
+        opacity: 0.8;
+    }
+    .cardGif {
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+        transition: .5s ease;
+        background-color: #572EE5;
+    }
+    .actionIcons {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    .cardGifIcon {
+        display: flex;
+        justify-content: center;
+        margin: 10px;
+        cursor: pointer;
+        background-color: #FFFFFF;
+        border-radius: 6px;
+        opacity: 70%;
+        height: 32px;
+        width: 32px;
+        border: 1px solid #9CAFC3;
+    }
+    .cardGifIcon:hover {
+        opacity: 100%;
+    }
+    .cardGifButton {
+        display: none;
+    }
+    .cardGifDescription {
+        font-family: 'Roboto', sans-serif;
+        margin-top: 30%;
+        margin-left: 5px;
+        color: white;
+    }
+    .tituloCardGifDescription {
+        font-weight: bold;
     }
 }

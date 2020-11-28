@@ -87,37 +87,26 @@ sliderButtonNext.onmouseover = () => {
 
 sliderButtonNext.onmouseleave = () => {
     sliderButtonNext.src = "images/button-slider-right.svg";
-
 }
 
 prevTrendingGif.addEventListener("click", () => {
-
-    carouselEvent("left", 0);
-
+    carouselEvent("left");
 })
 
 nextTrendingGif.addEventListener("click", () => {
-
-        carouselEvent("right", 0);
-    }
-
-)
+    carouselEvent("right");
+})
 
 ///////////////////////////
 //Fin de captura de eventos
 
-function carouselEvent(direction, offset) {
-    let trendingGifWidth = 0;
-    if (offset != 0) {
-        trendingGifWidth = offset;
-    } else {
-        trendingGifWidth = (document.querySelector(".trendGifHome").clientWidth) + 15;
+function carouselEvent(direction) {
 
-    }
+    let trendingGifWidth = (document.querySelector(".trendGifHome").clientWidth) + 15;
+
     //obtengo el ancho seteado de cada gif para hacer el calculo del limite de desplazamiento.
     //Con el ancho de cada gif y la cantidad de gif totales -2 armo el numero maximo de desplazamiento en px.
     let maxDisplacement = trendingGifWidth * (gifList.childElementCount - 3)
-
     let firstGifTrend = document.querySelectorAll(".resultTrendGif");
 
     if (direction === "right") {
@@ -138,9 +127,7 @@ function carouselEvent(direction, offset) {
                 element.style.transform = `translateX(${offsetTrendGif}px)`;
             }
         }
-
     }
-
 }
 
 

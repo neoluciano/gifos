@@ -17,7 +17,6 @@ let header = document.getElementById("header");
 let headerPosition = "noFixed";
 let logo = document.getElementById("logo");
 let logoText = document.getElementById("logo-text");
-let touchMoveReference = 0;
 let touchMoveStar = 0;
 let touchMoveEnd = true;
 
@@ -95,28 +94,21 @@ logo.addEventListener("click", () => {
 
 
 function gifTouchMoveEvent(event) {
-
-
     let x = event.touches[0].clientX;
     let y = event.touches[0].clientY;
+    console.log(`El touchmoveEnd es ${touchMoveEnd}`);
+
     if (touchMoveEnd) {
         if (x > touchMoveStar) {
             console.log("Derecha");
-            carouselEvent("left", 0);
-            touchMoveReference = x;
+            carouselEvent("left");
             touchMoveEnd = false;
-
         } else {
             console.log("Izquierda");
-            carouselEvent("right", 0);
-
-            touchMoveReference = x;
+            carouselEvent("right");
             touchMoveEnd = false;
         }
     }
-
-    // console.log("Se llamo al evento.")
-    // console.log(x + ", " + y);
 }
 
 
@@ -178,22 +170,17 @@ function loadAndPutTrendingGifs() {
                     gifTouchMoveEvent(e);
                 });
 
-                let cardGif = createCardForGif(item.username, item.title, item.id, gifUrl, "trend")
-
-                cardGif.ontouchstart = (e) => {
+                newGif.ontouchstart = (e) => {
                     touchMoveStar = e.touches[0].clientX;
                     console.log(`El evento inicio en: ${touchMoveStar}`);
                     // touchMoveEnd = false;
                 }
-                cardGif.ontouchend = () => {
+                newGif.ontouchend = () => {
                     console.log(`El evento FINALIZO`);
                     touchMoveEnd = true;
-
                 }
-                cardGif.addEventListener("touchmove", (e) => {
-                    // console.log("Evento lanzado!");
-                    gifTouchMoveEvent(e);
-                });
+
+                let cardGif = createCardForGif(item.username, item.title, item.id, gifUrl, "trend")
 
                 resultTrendGif.appendChild(newGif);
                 resultTrendGif.appendChild(cardGif);
