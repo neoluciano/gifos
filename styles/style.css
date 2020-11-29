@@ -789,4 +789,19 @@ footer p {
     .tituloCardGifDescription {
         font-weight: bold;
     }
+    #sectionCrearGifo {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid red;
+    }
+    #gridCrearGifo {
+        display: grid;
+        grid-template-columns: 1fr 1fr 4fr 2fr;
+        /* grid-template-rows: 1fr 1fr; */
+    }
+    #cameraContainerExtern {
+        width: 688px;
+        height: 390px;
+        border: 1px solid #572EE5;
+    }
 }
