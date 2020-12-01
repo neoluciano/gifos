@@ -792,16 +792,61 @@ footer p {
     #sectionCrearGifo {
         display: flex;
         flex-direction: row;
-        border: 1px solid red;
+        /* border: 1px solid red; */
     }
     #gridCrearGifo {
         display: grid;
-        grid-template-columns: 1fr 1fr 4fr 2fr;
-        /* grid-template-rows: 1fr 1fr; */
+        grid-template-columns: 2fr 4fr 2fr;
+        align-items: center;
+    }
+    #cameraFull {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    #luzCamaraGrid {
+        margin-top: 4px;
     }
     #cameraContainerExtern {
         width: 688px;
         height: 390px;
         border: 1px solid #572EE5;
+    }
+    #cameraContainerEdges {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 27px 594px 27px;
+        grid-template-rows: 25px 300px 25px;
+    }
+    #cceIzqSup {
+        border-top: 1px solid #50E3C2;
+        border-left: 1px solid #50E3C2;
+    }
+    #cceIzqInf {
+        grid-row-start: 3;
+        border-bottom: 1px solid #50E3C2;
+        border-left: 1px solid #50E3C2;
+    }
+    #cceDerSup {
+        grid-column-start: 3;
+        border-top: 1px solid #50E3C2;
+        border-right: 1px solid #50E3C2;
+    }
+    #cceDerInf {
+        grid-column-start: 3;
+        grid-row-start: 3;
+        border-bottom: 1px solid #50E3C2;
+        border-right: 1px solid #50E3C2;
+    }
+    #underCrearGifo {
+        display: flex;
+        flex-direction: column;
+    }
+    #buttonStart {
+        width: 127px;
+        height: 50px;
+        border: 1px solid #572EE5;
+        border-radius: 25px;
+        border-radius: 25px;
     }
 }
