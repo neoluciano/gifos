@@ -791,7 +791,7 @@ footer p {
     }
     #sectionCrearGifo {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         /* border: 1px solid red; */
     }
     #gridCrearGifo {
@@ -841,12 +841,84 @@ footer p {
     #underCrearGifo {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #underCrearGifoFirst {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 2fr 4fr 2fr;
+        /* border: 1px solid red; */
+    }
+    #pasosCrearGifContainer {
+        grid-column-start: 2;
+        display: flex;
+        flex-direction: row;
+        justify-self: center;
+        align-self: center;
+    }
+    .pasosCrearGif {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 13px;
+        border: 1px solid #572EE5;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        color: #572EE5;
+        text-align: center;
+        cursor: pointer;
+    }
+    #underCrearGifoMiddle {
+        /* margin-top: 19px; */
+        width: 795.9px;
+        height: 6.9px;
+        border-radius: 5%;
+        background-color: #572EE5;
     }
     #buttonStart {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
         width: 127px;
         height: 50px;
         border: 1px solid #572EE5;
         border-radius: 25px;
         border-radius: 25px;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bolder;
+        font-size: 13px;
+        color: #572EE5;
+        letter-spacing: 0;
+        text-align: center;
+        cursor: pointer;
+    }
+    #peliculaGrid {
+        margin-top: -25px;
+        justify-self: center;
+        align-self: center;
+    }
+    #createGifTextHeader {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bolder;
+        font-size: 25px;
+        color: #572EE5;
+        text-align: center;
+        line-height: 35px;
+    }
+    #createGifTextHeader span {
+        color: #50E3C2;
+    }
+    #createGifTextSecond {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        color: #000000;
+        text-align: center;
+        line-height: 29px;
     }
 }
