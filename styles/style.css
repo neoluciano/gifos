@@ -910,15 +910,16 @@ footer p {
         grid-column-start: 3;
     }
     #pasosCronometroContainer {
-        border: 1px solid red;
         grid-column-start: 2;
         align-self: center;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
     }
     #cronometro {
+        display: none;
         grid-column-start: 3;
         justify-self: end;
+        align-self: center;
         font-family: 'Montserrat', sans-serif;
         font-weight: bolder;
         font-size: 15px;
@@ -926,6 +927,13 @@ footer p {
         letter-spacing: 0;
         text-align: center;
         line-height: 22px;
+    }
+    .repetirCaptura {
+        cursor: pointer;
+        height: 20px;
+    }
+    .repetirCaptura:hover {
+        border-bottom: 2px solid #5ED7C6;
     }
     #createTextContainer {
         grid-column-start: 2;

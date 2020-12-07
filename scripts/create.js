@@ -7,6 +7,10 @@ let videoDiv = document.getElementById("videoDiv");
 let videoContainer = document.getElementById("videoContainer");
 let recorder = "";
 let newGifPreview = document.getElementById("newGifPreview");
+let cronometro = document.getElementById("cronometro");
+
+let cronoInicio = 0;
+let cronoTimeout = 0;
 
 
 
@@ -24,10 +28,12 @@ buttonStart.addEventListener("click", () => {
             createGifTextSecond.innerHTML = "El acceso a tu camara será válido sólo <br/> por el tiempo en el que estés creando el GIFO.";
             pasosCrearGif[0].classList.add("pasosCrearGifSelected");
             getStreamAndRecord();
+            cronometro.style.display = "block";
             break;
         case "GRABAR":
             recorder.startRecording();
             buttonStart.innerHTML = "FINALIZAR";
+            empezarDetenerCrono();
 
             break;
         case "FINALIZAR":
@@ -41,16 +47,41 @@ buttonStart.addEventListener("click", () => {
                 videoContainer.style.display = "none";
 
             });
-            break
+            empezarDetenerCrono();
+            buttonStart.innerHTML = "SUBIR GIFO";
+            cronometro.innerHTML = "REPETIR CAPTURA";
+            cronometro.classList.add("repetirCaptura");
+            break;
+
+        case "SUBIR GIFO":
+
+            break;
         default:
             console.error("El texto definido para el boton no esta controlado");
     }
 
+})
 
+cronometro.addEventListener("click", () => {
+    if (cronometro.innerHTML === "REPETIR CAPTURA") {
+        readyToCreate();
+    }
 })
 
 ///////////////////////////
 //Fin de captura de eventos
+
+function readyToCreate() {
+    getStreamAndRecord();
+
+    cronometro.classList.remove("repetirCaptura");
+    buttonStart.innerHTML = "GRABAR";
+    cronometro.innerHTML = "00:00:00";
+    newGifPreview.style.display = "none";
+    videoContainer.style.display = "block";
+    console.log("Deberia llegar hasta aca");
+
+}
 
 function crearGifo() {
     if (getStreamAndRecord()) {
@@ -58,6 +89,43 @@ function crearGifo() {
     } else {
         console.log("Algo salio mal");
     }
+}
+
+function empezarDetenerCrono() {
+    if (cronoTimeout === 0) {
+        // empezar el cronometro
+        // Obtenemos el valor actual
+        cronoInicio = vuelta = new Date().getTime();
+        console.log(cronoInicio);
+
+        // iniciamos el proceso
+        cronoFuncionando();
+    } else {
+        // detemer el cronometro
+        clearTimeout(cronoTimeout);
+        cronoTimeout = 0;
+        console.log("Crono TimeOut: " + cronoTimeout);
+    }
+}
+
+function cronoFuncionando() {
+    // obteneos la fecha actual
+    var actual = new Date().getTime();
+
+    // obtenemos la diferencia entre la fecha actual y la de inicio
+    var diff = new Date(actual - cronoInicio);
+
+    // mostramos la diferencia entre la fecha actual y la inicial
+    var result = LeadingZero(diff.getUTCHours()) + ":" + LeadingZero(diff.getUTCMinutes()) + ":" + LeadingZero(diff.getUTCSeconds());
+    cronometro.innerHTML = result;
+
+    // Indicamos que se ejecute esta función nuevamente dentro de 1 segundo
+    cronoTimeout = setTimeout("cronoFuncionando()", 1000);
+}
+
+/* Funcion que pone un 0 delante de un valor si es necesario */
+function LeadingZero(Time) {
+    return (Time < 10) ? "0" + Time : +Time;
 }
 
 
