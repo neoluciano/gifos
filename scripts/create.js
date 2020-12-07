@@ -1,3 +1,5 @@
+const uploadGiphyEndpoint = "https://upload.giphy.com/v1/gifs?";
+
 let buttonStart = document.getElementById("buttonStart");
 let pasosCrearGif = document.getElementsByClassName("pasosCrearGif");
 let createTextContainer = document.getElementById("createTextContainer");
@@ -6,6 +8,8 @@ let createGifTextSecond = document.getElementById("createGifTextSecond");
 let videoDiv = document.getElementById("videoDiv");
 let videoContainer = document.getElementById("videoContainer");
 let recorder = "";
+let newGifo = "";
+let newGifURL = "";
 let newGifPreview = document.getElementById("newGifPreview");
 let cronometro = document.getElementById("cronometro");
 
@@ -38,11 +42,11 @@ buttonStart.addEventListener("click", () => {
             break;
         case "FINALIZAR":
             recorder.stopRecording(function() {
-                var newGifo = recorder.getBlob();
+                newGifo = recorder.getBlob();
                 invokeSaveAsDialog(newGifo);
                 console.log(newGifo);
-                newGifPreview.setAttribute("src", URL.createObjectURL(newGifo));
-                console.log(URL.createObjectURL(newGifo));
+                newGifURL = URL.createObjectURL(newGifo);
+                newGifPreview.setAttribute("src", newGifURL);
                 newGifPreview.style.display = "block";
                 videoContainer.style.display = "none";
 
@@ -54,7 +58,7 @@ buttonStart.addEventListener("click", () => {
             break;
 
         case "SUBIR GIFO":
-
+            handleResultUploadNewGif();
             break;
         default:
             console.error("El texto definido para el boton no esta controlado");
@@ -73,13 +77,11 @@ cronometro.addEventListener("click", () => {
 
 function readyToCreate() {
     getStreamAndRecord();
-
     cronometro.classList.remove("repetirCaptura");
     buttonStart.innerHTML = "GRABAR";
     cronometro.innerHTML = "00:00:00";
     newGifPreview.style.display = "none";
     videoContainer.style.display = "block";
-    console.log("Deberia llegar hasta aca");
 
 }
 
@@ -158,4 +160,28 @@ function getStreamAndRecord() {
             };
         })
         .catch(function(err) { console.error(err.name + ": " + err.message); }); // always check for errors at the end
+}
+
+async function uploadNewGif() {
+    let form = new FormData();
+    form.set('file', newGifo, 'myGif.gif');
+    console.log(form.get('file'));
+    let fullEndpoint = `${uploadGiphyEndpoint}api_key=${giphyApiKey}`;
+    console.log(fullEndpoint);
+    let response = await fetch(fullEndpoint, {
+        method: 'POST',
+        body: form
+    });
+    let json = await response.json();
+    let result = json.data;
+    return result;
+}
+
+function handleResultUploadNewGif() {
+    uploadNewGif()
+        .then(element => {
+            console.log(element);
+        }).catch(error => {
+            console.error("Se produjo el siguiente error al intentar subir el gifo: " + error);
+        })
 }
