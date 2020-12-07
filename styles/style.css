@@ -907,6 +907,25 @@ footer p {
         margin-top: -25px;
         justify-self: center;
         align-self: center;
+        grid-column-start: 3;
+    }
+    #pasosCronometroContainer {
+        border: 1px solid red;
+        grid-column-start: 2;
+        align-self: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    #cronometro {
+        grid-column-start: 3;
+        justify-self: end;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bolder;
+        font-size: 15px;
+        color: #572EE5;
+        letter-spacing: 0;
+        text-align: center;
+        line-height: 22px;
     }
     #createTextContainer {
         grid-column-start: 2;
@@ -933,5 +952,23 @@ footer p {
         color: #000000;
         text-align: center;
         line-height: 29px;
+    }
+    #videoDiv {
+        display: none;
+        grid-column-start: 2;
+        grid-row-start: 2;
+        align-self: center;
+        justify-self: center;
+        width: 480px;
+        height: 320px;
+    }
+    #videoContainer {
+        width: 480px;
+        height: 320px;
+    }
+    #newGifPreview {
+        display: none;
+        width: 480px;
+        height: 320px;
     }
 }
