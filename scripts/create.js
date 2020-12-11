@@ -14,6 +14,8 @@ let newGifPreview = document.getElementById("newGifPreview");
 let cronometro = document.getElementById("cronometro");
 let loader = document.getElementById("loader");
 let descriptionTextNewGif = document.getElementById("descriptionTextNewGif");
+let actionIconsNewGif = document.getElementById("actionIconsNewGif");
+let newGifoId = "";
 
 let cronoInicio = 0;
 let cronoTimeout = 0;
@@ -195,7 +197,98 @@ function handleResultUploadNewGif() {
             descriptionTextNewGif.innerHTML = "GIFO subido con éxito";
             console.log(element);
             console.log("Se subio el gifo con exito.");
+            newGifoId = element.id;
+            console.log(`El id del nuevo gifo es ${newGifoId}`);
+            addOrRemoveMyGifo(newGifoId);
+            //Creo el Icono para descargar el gif.
+            let icon;
+            icon = createDownloadIconForGifCard(newGifURL);
+            actionIconsNewGif.appendChild(icon);
         }).catch(error => {
             console.error("Se produjo el siguiente error al intentar subir el gifo: " + error);
         })
+}
+
+
+function addOrRemoveMyGifo(gifId) {
+    let alreadyExists = false;
+    let iconResult = "";
+    if (localStorage.getItem("gifosMyGifos") != null) {
+        let arrayMyGifos = JSON.parse(localStorage.getItem("gifosMyGifos"))
+        for (item of arrayMyGifos) { //Si ya existe, lo elimino del local storage.
+            if (item === gifId) {
+                alreadyExists = true;
+                console.log(`El GIF ${gifId} se eliminara del listado de mis gifos.`)
+                    // console.error("El gif que intento agregar ya existe en mis gifos.");
+                arrayMyGifos.splice(arrayMyGifos.indexOf(item), 1);
+                localStorage.setItem("gifosMyGifos", JSON.stringify(arrayMyGifos));
+                break;
+            }
+        }
+        if (!alreadyExists) {
+            arrayMyGifos.push(gifId);
+            localStorage.setItem("gifosMyGifos", JSON.stringify(arrayMyGifos));
+        }
+
+    } else {
+        console.log("Aun no se registraron GIF favoritos en el storage local.");
+        let arrayMyGifos = [];
+        arrayMyGifos[0] = gifId;
+        localStorage.setItem("gifosMyGifos", JSON.stringify(arrayMyGifos));
+    }
+
+}
+
+function getNewGifoInfo(newGifoId) {
+    getGifsByIds(newGifoId)
+        .then(array => {
+            console.log(array);
+            for (item of array) {
+
+                let gifUrl = item.images.original.url;
+                let resultSearchGifDiv = document.createElement("div");
+                resultSearchGifDiv.className = "resultSearchGifDiv";
+
+                let newGif = document.createElement('img');
+                newGif.src = gifUrl;
+                newGif.alt = item.title;
+                newGif.className = "searchedGifsHome";
+
+                let cardGif = createCardForGif(item.userName, item.title, item.id, gifUrl);
+
+                resultSearchGifDiv.appendChild(newGif);
+                resultSearchGifDiv.appendChild(cardGif);
+                favoritesGifsDiv.appendChild(resultSearchGifDiv);
+
+            }
+        })
+        .catch(error => {
+            console.error("Se produjo el error siguiente: " + error);
+        })
+}
+
+function createCopyLinkIconForGifCard(gifUrl) {
+    let imgSrc = "images/icon-link-hover.svg";
+    let icon = document.createElement("div");
+    let button = document.createElement("input");
+    button.type = "button";
+    button.value = "Copiar Link Gif";
+    button.className = "cardGifButton";
+    button.id = `buttonCopyLink`;
+
+    icon.appendChild(button);
+
+    let label = document.createElement("label");
+    label.className = "cardGifIcon"
+    label.setAttribute("for", button.id);
+
+    let img = document.createElement("img");
+    img.setAttribute("onclick", `createAForDownloadGif("${gifUrl}")`);
+    img.src = imgSrc;
+    img.alt = "Copiar Link Gif";
+
+    label.appendChild(img);
+    icon.appendChild(label);
+
+    return icon;
 }
