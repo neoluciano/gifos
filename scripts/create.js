@@ -12,6 +12,8 @@ let newGifo = "";
 let newGifURL = "";
 let newGifPreview = document.getElementById("newGifPreview");
 let cronometro = document.getElementById("cronometro");
+let loader = document.getElementById("loader");
+let descriptionTextNewGif = document.getElementById("descriptionTextNewGif");
 
 let cronoInicio = 0;
 let cronoTimeout = 0;
@@ -43,7 +45,7 @@ buttonStart.addEventListener("click", () => {
         case "FINALIZAR":
             recorder.stopRecording(function() {
                 newGifo = recorder.getBlob();
-                invokeSaveAsDialog(newGifo);
+                //invokeSaveAsDialog(newGifo);
                 console.log(newGifo);
                 newGifURL = URL.createObjectURL(newGifo);
                 newGifPreview.setAttribute("src", newGifURL);
@@ -58,7 +60,15 @@ buttonStart.addEventListener("click", () => {
             break;
 
         case "SUBIR GIFO":
+            let cardNewGif = document.getElementById("cardNewGif");
+            cardNewGif.style.display = "block";
+            cardNewGif.classList.add("cardNewGifDisplay");
+            pasosCrearGif[1].classList.remove("pasosCrearGifSelected");
+            pasosCrearGif[2].classList.add("pasosCrearGifSelected");
             handleResultUploadNewGif();
+            buttonStart.style.display = "none";
+            cronometro.style.display = "none";
+
             break;
         default:
             console.error("El texto definido para el boton no esta controlado");
@@ -180,7 +190,11 @@ async function uploadNewGif() {
 function handleResultUploadNewGif() {
     uploadNewGif()
         .then(element => {
+            loader.setAttribute("src", "images/check.svg");
+            loader.classList.remove("loader");
+            descriptionTextNewGif.innerHTML = "GIFO subido con éxito";
             console.log(element);
+            console.log("Se subio el gifo con exito.");
         }).catch(error => {
             console.error("Se produjo el siguiente error al intentar subir el gifo: " + error);
         })
