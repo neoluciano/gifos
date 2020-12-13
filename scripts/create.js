@@ -16,6 +16,8 @@ let loader = document.getElementById("loader");
 let descriptionTextNewGif = document.getElementById("descriptionTextNewGif");
 let actionIconsNewGif = document.getElementById("actionIconsNewGif");
 let newGifoId = "";
+// let copyText = document.getElementById("toClipBoard");
+
 
 let cronoInicio = 0;
 let cronoTimeout = 0;
@@ -204,6 +206,8 @@ function handleResultUploadNewGif() {
             let icon;
             icon = createDownloadIconForGifCard(newGifURL);
             actionIconsNewGif.appendChild(icon);
+            icon = createCopyLinkIconForGifCard("www.google.com")
+            actionIconsNewGif.appendChild(icon);
         }).catch(error => {
             console.error("Se produjo el siguiente error al intentar subir el gifo: " + error);
         })
@@ -242,25 +246,14 @@ function addOrRemoveMyGifo(gifId) {
 function getNewGifoInfo(newGifoId) {
     getGifsByIds(newGifoId)
         .then(array => {
-            console.log(array);
+            //console.log(array);
+            let gifUrl = "";
             for (item of array) {
-
-                let gifUrl = item.images.original.url;
-                let resultSearchGifDiv = document.createElement("div");
-                resultSearchGifDiv.className = "resultSearchGifDiv";
-
-                let newGif = document.createElement('img');
-                newGif.src = gifUrl;
-                newGif.alt = item.title;
-                newGif.className = "searchedGifsHome";
-
-                let cardGif = createCardForGif(item.userName, item.title, item.id, gifUrl);
-
-                resultSearchGifDiv.appendChild(newGif);
-                resultSearchGifDiv.appendChild(cardGif);
-                favoritesGifsDiv.appendChild(resultSearchGifDiv);
-
+                gifUrl = item.images.original.url;
             }
+            console.log(`La url a copiar seria: ${gifUrl}`);
+
+            return gifUrl;
         })
         .catch(error => {
             console.error("Se produjo el error siguiente: " + error);
@@ -283,7 +276,7 @@ function createCopyLinkIconForGifCard(gifUrl) {
     label.setAttribute("for", button.id);
 
     let img = document.createElement("img");
-    img.setAttribute("onclick", `createAForDownloadGif("${gifUrl}")`);
+    img.setAttribute("onclick", `copyToClipboard()`);
     img.src = imgSrc;
     img.alt = "Copiar Link Gif";
 
@@ -291,4 +284,38 @@ function createCopyLinkIconForGifCard(gifUrl) {
     icon.appendChild(label);
 
     return icon;
+}
+
+async function copyToClipboard() {
+    /* Get the text field */
+    let underCrearGifoFirst = document.getElementById("underCrearGifoFirst");
+    let value = await getGifsByIds(newGifoId)
+        .then(array => {
+            //console.log(array);
+            let gifUrl = "";
+            for (item of array) {
+                gifUrl = item.images.original.url;
+            }
+            console.log(`La url a copiar seria: ${gifUrl}`);
+
+            return gifUrl;
+        })
+        .catch(error => {
+            console.error("Se produjo el error siguiente: " + error);
+        })
+    console.log(`El valor de value es ${value}`);
+    let copyText = document.createElement("input");
+    copyText.type = "text";
+    underCrearGifoFirst.appendChild(copyText);
+    copyText.value = value;
+    /* Select the text field */
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+    /* Copy the text inside the text field */
+    document.execCommand("copy");
+    copyText.remove();
+
+    /* Alert the copied text */
+    //alert("Copied the text: " + copyText.value);
 }
