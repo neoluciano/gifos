@@ -12,7 +12,6 @@ let sectionTrendingGifs = document.getElementById("trendingGifs");
 
 // let searchBar = document.getElementById("searchBar");
 let linkModoNocturno = document.getElementById("modoNocturno");
-let imgCreateGifo = document.getElementById("imgCreateGifo");
 let header = document.getElementById("header");
 let headerPosition = "noFixed";
 let logo = document.getElementById("logo");
@@ -53,21 +52,6 @@ observer.observe(document.querySelector("#header-top"));
 //Captura de Eventos
 ////////////////////
 
-imgCreateGifo.onmouseover = () => {
-    imgCreateGifo.src = "images/CTA-crear-gifo-hover.svg";
-}
-
-imgCreateGifo.onmouseleave = () => {
-    imgCreateGifo.src = "images/button-crear-gifo.svg";
-}
-
-imgCreateGifo.onmousedown = () => {
-    imgCreateGifo.src = "images/CTA-crear-gifo-active.svg";
-}
-
-imgCreateGifo.onmouseup = () => {
-    imgCreateGifo.src = "images/CTA-crear-gifo-hover.svg";
-}
 
 
 // header.addEventListener("click", () => {

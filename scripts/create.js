@@ -1,5 +1,7 @@
 const uploadGiphyEndpoint = "https://upload.giphy.com/v1/gifs?";
 
+let imgCreateGifo = document.getElementById("imgCreateGifo");
+let sectionCrearGifo = document.getElementById("sectionCrearGifo");
 let buttonStart = document.getElementById("buttonStart");
 let pasosCrearGif = document.getElementsByClassName("pasosCrearGif");
 let createTextContainer = document.getElementById("createTextContainer");
@@ -85,6 +87,34 @@ cronometro.addEventListener("click", () => {
         readyToCreate();
     }
 })
+
+
+imgCreateGifo.onmouseover = () => {
+    imgCreateGifo.src = "images/CTA-crear-gifo-hover.svg";
+}
+
+imgCreateGifo.onmouseleave = () => {
+    imgCreateGifo.src = "images/button-crear-gifo.svg";
+}
+
+imgCreateGifo.onmousedown = () => {
+    imgCreateGifo.src = "images/CTA-crear-gifo-active.svg";
+}
+
+imgCreateGifo.onmouseup = () => {
+    imgCreateGifo.src = "images/CTA-crear-gifo-hover.svg";
+}
+
+imgCreateGifo.onclick = () => {
+    sectionCrearGifo.className = "sectionCrearGifoDisplayed";
+    let sectionsToHide = document.getElementsByTagName("section");
+
+    for (let i = 1; i < sectionsToHide.length; i++) {
+        let element = sectionsToHide[i];
+        element.style.display = "none";
+    }
+}
+
 
 ///////////////////////////
 //Fin de captura de eventos
@@ -315,6 +345,7 @@ async function copyToClipboard() {
     /* Copy the text inside the text field */
     document.execCommand("copy");
     copyText.remove();
+
 
     /* Alert the copied text */
     //alert("Copied the text: " + copyText.value);

@@ -601,6 +601,10 @@ footer p {
     animation: rotation 2s infinite linear;
 }
 
+.sectionCrearGifo {
+    display: none;
+}
+
 @keyframes rotation {
     from {
         transform: rotate(0deg);
@@ -802,7 +806,7 @@ footer p {
     .tituloCardGifDescription {
         font-weight: bold;
     }
-    #sectionCrearGifo {
+    .sectionCrearGifoDisplayed {
         display: flex;
         flex-direction: column;
         /* border: 1px solid red; */
