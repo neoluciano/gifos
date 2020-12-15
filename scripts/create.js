@@ -18,6 +18,11 @@ let loader = document.getElementById("loader");
 let descriptionTextNewGif = document.getElementById("descriptionTextNewGif");
 let actionIconsNewGif = document.getElementById("actionIconsNewGif");
 let newGifoId = "";
+let linkMyGifos = document.getElementById("linkMyGifos");
+let myGifosSection = document.getElementById("myGifosSection");
+let myGifosGifsDiv = document.getElementById("myGifosGifs");
+let noGifosYet = document.getElementById("noGifosYet");
+
 // let copyText = document.getElementById("toClipBoard");
 
 
@@ -113,6 +118,18 @@ imgCreateGifo.onclick = () => {
         let element = sectionsToHide[i];
         element.style.display = "none";
     }
+}
+
+linkMyGifos.onclick = () => {
+    let arrayMyGifos = JSON.parse(localStorage.getItem("gifosMyGifos"));
+    drawMyGifosHTMLSection();
+
+    if (arrayMyGifos.length > 0) {
+        noGifosYet.style.display = "none";
+        loadAndPutMyGifos(0);
+    }
+
+
 }
 
 
@@ -347,6 +364,56 @@ async function copyToClipboard() {
     copyText.remove();
 
 
-    /* Alert the copied text */
-    //alert("Copied the text: " + copyText.value);
+
+}
+
+function drawMyGifosHTMLSection() {
+    sectionTop.className = "sectionHidden";
+    sectionSearch.className = "sectionHidden";
+    sectionTrendingTerms.className = "sectionHidden";
+    favoritesSection.className = "sectionHidden"
+    myGifosSection.className = "favoritesSectionDisplayed";
+    linkMyGifos.style.color = "#9CAFC3";
+
+}
+
+
+function loadAndPutMyGifos(offset) {
+    if (offset === 0) {
+        myGifosGifsDiv.innerHTML = "";
+    }
+
+    let arrayMyGifos = JSON.parse(localStorage.getItem("gifosMyGifos"));
+    // En la siguiente linea determino si quedan gifs del array de mis favoritos para mostrar. En caso negativo, ocutlaria el boton ver mas.
+    let gifsToShow = arrayMyGifos.length - (offset + resultsLimit);
+    if (gifsToShow < 0) {
+        labelVerMasFavoritosButton.style.display = "none";
+    }
+    arrayMyGifos = arrayMyGifos.splice(offset, resultsLimit); //traigo solo 12 gifs por peticion, comenzando por la posicion del offset.
+    let arrayToString = arrayMyGifos.join(',');
+    getGifsByIds(arrayToString)
+        .then(array => {
+            console.log(array);
+            for (item of array) {
+
+                let gifUrl = item.images.original.url;
+                let resultSearchGifDiv = document.createElement("div");
+                resultSearchGifDiv.className = "resultSearchGifDiv";
+
+                let newGif = document.createElement('img');
+                newGif.src = gifUrl;
+                newGif.alt = item.title;
+                newGif.className = "searchedGifsHome";
+
+                let cardGif = createCardForGif(item.userName, item.title, item.id, gifUrl);
+
+                resultSearchGifDiv.appendChild(newGif);
+                resultSearchGifDiv.appendChild(cardGif);
+                myGifosGifsDiv.appendChild(resultSearchGifDiv);
+
+            }
+        })
+        .catch(error => {
+            console.error("Se produjo el error siguiente: " + error);
+        })
 }

@@ -32,6 +32,7 @@ function drawFavoritosHTMLSection() {
     sectionTop.className = "sectionHidden";
     sectionSearch.className = "sectionHidden";
     sectionTrendingTerms.className = "sectionHidden";
+    myGifosSection.className = "sectionHidden";
     favoritesSection.className = "favoritesSectionDisplayed";
     linkFavoritos.style.color = "#9CAFC3";
 

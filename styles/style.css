@@ -134,7 +134,7 @@ main {
     /* align-items: center;
     align-content: center;
     justify-content: space-around; */
-    margin-top: 105px;
+    margin-top: 76px;
     width: 286px;
     height: 99px;
     /* border: 1px solid red; */
@@ -364,7 +364,7 @@ main {
 }
 
 footer h3 {
-    font-family: 'Roboto-Regular';
+    font-family: 'Roboto', sans-serif;
     font-size: 15px;
     color: #000000;
     letter-spacing: 0;
@@ -375,16 +375,15 @@ footer {
     flex-direction: column;
     align-items: center;
     border-bottom: 5px solid #572EE5;
-    margin-top: 47px;
+    height: 116px;
 }
 
 footer p {
-    font-family: 'Roboto-Regular';
+    font-family: 'Roboto', sans-serif;
     font-size: 14px;
     color: #000000;
     letter-spacing: 0;
     line-height: 20px;
-    margin-bottom: 23px;
 }
 
 .social {
@@ -396,6 +395,10 @@ footer p {
 .social i {
     color: #CDD6E0;
     padding: 5.3%;
+}
+
+.social :hover {
+    color: #572EE5;
 }
 
 .searchResults {
@@ -1027,5 +1030,22 @@ footer p {
     }
     #descriptionTextNewGif {
         margin-top: 14px;
+    }
+    footer {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        /* margin-top: 47px; */
+    }
+    footer h3 {
+        font-size: 13px;
+    }
+    .social {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+    .social a {
+        margin-right: 19px;
     }
 }
