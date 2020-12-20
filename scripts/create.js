@@ -21,7 +21,7 @@ let newGifoId = "";
 let linkMyGifos = document.getElementById("linkMyGifos");
 let myGifosSection = document.getElementById("myGifosSection");
 let myGifosGifsDiv = document.getElementById("myGifosGifs");
-let noGifosYet = document.getElementById("noGifosYet");
+let noGifYet = document.getElementById("noMyGifosYet");
 
 // let copyText = document.getElementById("toClipBoard");
 
@@ -122,13 +122,13 @@ imgCreateGifo.onclick = () => {
 
 linkMyGifos.onclick = () => {
     let arrayMyGifos = JSON.parse(localStorage.getItem("gifosMyGifos"));
+
     drawMyGifosHTMLSection();
 
     if (arrayMyGifos.length > 0) {
-        noGifosYet.style.display = "none";
+        noGifYet.style.display = "none";
         loadAndPutMyGifos(0);
     }
-
 
 }
 
@@ -374,7 +374,7 @@ function drawMyGifosHTMLSection() {
     favoritesSection.className = "sectionHidden"
     myGifosSection.className = "favoritesSectionDisplayed";
     linkMyGifos.style.color = "#9CAFC3";
-
+    linkFavoritos.style.color = "#572EE5";
 }
 
 

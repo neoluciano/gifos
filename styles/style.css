@@ -483,7 +483,10 @@ footer p {
 }
 
 #verMasButton,
-#verMasFavoritosButton {
+#verMasFavoritosButton,
+#verMasMyGifosButton,
+#labelVerMasFavoritosButton,
+#labelVerMasMyGifosButton {
     display: none;
 }
 
@@ -608,6 +611,65 @@ footer p {
     display: none;
 }
 
+.favoritesSectionDisplayed {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.favoritesDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.myGifosDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#favoritesSection h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    font-size: 25px;
+    color: #572EE5;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 8px;
+}
+
+#myGifosSection h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bolder;
+    font-size: 25px;
+    color: #572EE5;
+    text-align: center;
+    line-height: 30px;
+    margin-top: 8px;
+}
+
+.noGifYet {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#noMyGifosYet h3 {
+    color: #50E3C2;
+    font-size: 22px;
+    text-align: center;
+    line-height: 25px;
+}
+
+#noFavoritesYet h3 {
+    color: #50E3C2;
+    font-size: 22px;
+    text-align: center;
+    line-height: 25px;
+}
+
 @keyframes rotation {
     from {
         transform: rotate(0deg);
@@ -712,24 +774,6 @@ footer p {
     #imgIlustra {
         width: 399px;
         height: 190px;
-    }
-    .favoritesSectionDisplayed {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .favoritesDiv {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    #favoritesSection h3 {
-        font-family: "Montserrat-Bold";
-        font-weight: bolder;
-        font-size: 25px;
-        color: #572EE5;
-        text-align: center;
-        line-height: 30px;
     }
     #gifMaximized {
         width: 695px;

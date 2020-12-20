@@ -6,6 +6,7 @@ let favoritesGifsDiv = document.getElementById("favoritesGifs");
 let verMasFavoritosButton = document.getElementById("verMasFavoritosButton");
 let labelVerMasFavoritosButton = document.getElementById("labelVerMasFavoritosButton");
 let favoritesLoad = 0;
+let noFavoritesYet = document.getElementById("noFavoritesYet");
 
 
 //Captura de Eventos
@@ -13,8 +14,12 @@ let favoritesLoad = 0;
 
 linkFavoritos.addEventListener("click", () => {
     drawFavoritosHTMLSection();
-    loadAndPutMyFavoritesGifs(0);
+    let arrayFavoritos = JSON.parse(localStorage.getItem("gifosFavoriteGifs"));
 
+    if (arrayFavoritos.length > 0) {
+        noFavoritesYet.style.display = "none";
+        loadAndPutMyFavoritesGifs(0);
+    }
 })
 
 verMasFavoritosButton.addEventListener("click", () => {
@@ -35,6 +40,7 @@ function drawFavoritosHTMLSection() {
     myGifosSection.className = "sectionHidden";
     favoritesSection.className = "favoritesSectionDisplayed";
     linkFavoritos.style.color = "#9CAFC3";
+    linkMyGifos.style.color = "#572EE5";
 
 }
 

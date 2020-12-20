@@ -125,7 +125,7 @@
             </div>
 
             <section class="trendingText" id="sectionTrendingTerms">
-                <h2>Trending:</h2>
+                <h2 id="trendingH2">Trending:</h2>
 
                 <p id="trendingTerms">
                     <!-- aqui se dibujan los trending terms -->
@@ -186,10 +186,13 @@
             <div class="favoritesDiv">
                 <img src="images/icon-favoritos.svg">
                 <h3>Favoritos</h3>
+                <div id="noFavoritesYet" class="noGifYet">
+                    <img src="images/icon-fav-sin-contenido.svg" alt="Sin gifos">
+                    <h3>"¡Guarda tu primer GIFO en Favoritos<br/> para que se muestre aquí!"</h3>
+                </div>
                 <div id="favoritesGifs" class="gifsGrid">
 
                 </div>
-
                 <input type="button" value="Ver Mas" id="verMasFavoritosButton">
                 <label id="labelVerMasFavoritosButton" class="button" for="verMasFavoritosButton"><img id="imgVerMasFavoritosButton" src="images/CTA-ver-mas.svg" alt="Ver Mas"></label>
             </div>
@@ -197,11 +200,11 @@
 
         <section id="myGifosSection" class="favoritesSection">
             <div class="myGifosDiv">
-                <img src="images/icon-favoritos.svg">
+                <img src="images/icon-mis-gifos.svg">
                 <h3>Mis GIFOS</h3>
-                <div id="noGifosYet">
+                <div id="noMyGifosYet" class="noGifYet">
                     <img src="images/icon-mis-gifos-sin-contenido.svg" alt="Sin gifos">
-                    <h3>Animate a crear tu primer GIFO</h3>
+                    <h3>Animate a crear tu primer GIFO!</h3>
                 </div>
                 <div id="myGifosGifs" class="gifsGrid">
 

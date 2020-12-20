@@ -232,6 +232,7 @@ function loadAndPutSearchedGifs(searchValue, offset) {
             let searchResultsGifs = document.getElementById("searchResultsGifs");
             //searchResultsGifs es la seccion donde se cargan los GIFs que arroja el resutlado de la busqueda
             searchedText.textContent = searchValue;
+            document.getElementById("trendingH2").scrollIntoView();
 
             let newSearchResultsGifs = document.createElement('div');
             newSearchResultsGifs.id = "searchResultsGifs";
