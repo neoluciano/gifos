@@ -27,6 +27,32 @@
             <label for="chk-menu" id="hamburguer-menu"><i class="fa fa-bars" aria-hidden="true" ></i></label>
             <label for="chk-menu" id="hamburguer-menu-x"><i class="fa fa-times" aria-hidden="true" ></i></label>
         </div>
+
+        <!-- AQUI EMPIEZA EL BUSCADOR QUE SE PRENDE SOLO EN STICKY -->
+        <div class="searchBarSticky" id="searchBarSticky">
+            <div id="searchArea">
+                <div id="closeImageDiv">
+                    <input type="button" value="Cerrar" id="closeButton">
+                    <label for="closeButton"><img id="closeImage" src="images/close.svg" alt="Buscar"></label>
+                </div>
+                <div id="searchInput">
+                    <input type="text" id="searchInputText" placeholder="Busca GIFOS y más">
+                </div>
+                <div id="searchImage">
+                    <input type="button" value="Buscar" id="searchButton">
+                    <label for="searchButton"><img id="imgLupa" src="images/icon-search.svg" alt="Buscar"></label>
+                </div>
+            </div>
+
+            <div id="searchAutocomplete" class="searchAutocomplete">
+                <div class="autoDivisor"></div>
+                <div id="autocompleteResultsList">
+                    <!-- aqui se escriben por JS los terminos de busqueda -->
+
+                </div>
+            </div>
+        </div>
+        <!-- AQUI TERMINA EL BUSCADOR QUE SE MUESTSRA SOLO EN STICKY -->
         <nav class="menu">
             <ul>
                 <li><a id="modoNocturno">Modo Nocturno</a></li>

@@ -183,6 +183,10 @@ main {
     border-radius: 27px;
 }
 
+.searchBarSticky {
+    display: none;
+}
+
 #searchArea {
     display: flex;
     flex-direction: row;
@@ -770,6 +774,15 @@ footer p {
     }
     .searchBar {
         width: 551px;
+    }
+    .searchBarSticky {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* justify-content: space-around; */
+        width: 334px;
+        border: 1px solid #572EE5;
+        border-radius: 27px;
     }
     #imgIlustra {
         width: 399px;
